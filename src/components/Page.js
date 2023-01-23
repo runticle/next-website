@@ -32,7 +32,7 @@ const GlobalStyles = createGlobalStyle`
       --offWhite: #ededed;
       --lightGreen: #8bbb93;
       --darkGreen: #26402a;
-      --maxWidth: 1000px;
+      --maxWidth: 2000px;
       --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
       box-sizing: border-box;
       font-size: 62.5%; // set defalt font size to 10px.
