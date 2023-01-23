@@ -81,7 +81,7 @@ const Arrow = styled.div`
 
 export default function Card({title, description, imageUrl, action=null}) {
   return (
-    <CardStyles>
+    <CardStyles onClick={action}>
         <ImageContainer>
             <Image src={imageUrl} alt={title} fill className={'image'}/>
         </ImageContainer>

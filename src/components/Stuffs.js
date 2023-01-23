@@ -1,3 +1,4 @@
+import Router from "next/router"
 import styled from "styled-components"
 import Card from "./Card"
 
@@ -16,7 +17,8 @@ export default function Stuffs() {
         {
             title: 'Buba',
             description: 'Best dog in the world',
-            imageUrl: "/buba.jpg"
+            imageUrl: "/buba.jpg",
+            action: () =>  Router.push( { pathname: `/buba`})
         }
 ]
 
