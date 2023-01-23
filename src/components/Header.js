@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import Nav from './Nav';
 
 const Logo = styled.h1`
   font-size: 3rem;
@@ -16,7 +17,8 @@ const Logo = styled.h1`
 
 const HeaderStyles = styled.header`
   .bar {
-    border-bottom: 5px solid var(--black, black);
+    border-bottom: 5px solid var(--lightGreen, lightGreen);
+    padding: 1rem;
     display: grid;
     grid-template-columns: auto 1fr;
     justify-content: space-between;
@@ -31,6 +33,7 @@ export default function Header() {
         <Logo>
           <Link href="/">Alfie Freeman</Link>
         </Logo>
+        <Nav/>
       </div>
     </HeaderStyles>
   );
