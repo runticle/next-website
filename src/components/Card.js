@@ -7,11 +7,19 @@ const CardStyles = styled.div`
   font-size: 3rem;
   z-index: 2;
   width: 80%;
+  margin: 0 auto;
   margin-top: 50px;
+  transition: transform .3s; /* Animation */
+
   cursor: pointer;
+
+  &:focus, :hover {
+        transform: scale(1.1);
+  }
 
   .text-contents {
     padding: 0 1rem;
+    box-sizing: border-box;
       
       h1{
           font-size: 2rem;
@@ -22,9 +30,6 @@ const CardStyles = styled.div`
         }
 
 
-        &:focus, :hover {
-            background: var(--lightGreen, lightGreen); // TODO something different lol
-        }
     }
 `;
 
