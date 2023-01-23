@@ -7,11 +7,11 @@ const CardStyles = styled.div`
   width: 80%;
   margin: 0 auto;
   margin-top: 50px;
-  transition: transform .3s; /* Animation */
+  transition: transform .3s;
 
   --displayArrow: none;
 
-  cursor: pointer;
+  cursor: ${props => !!props.action ? 'pointer' : 'unset'};
 
   &:focus, :hover {
         transform: scale(1.1);
@@ -81,7 +81,7 @@ const Arrow = styled.div`
 
 export default function Card({title, description, imageUrl, action=null}) {
   return (
-    <CardStyles onClick={action}>
+    <CardStyles onClick={action} action={action}>
         <ImageContainer>
             <Image src={imageUrl} alt={title} fill className={'image'}/>
         </ImageContainer>
