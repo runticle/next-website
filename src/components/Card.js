@@ -94,7 +94,7 @@ export default function Card({title, description, imageUrl, action=null}) {
                     {description}
                 </p>
             </div>
-            <Arrow />
+            {!!action && <Arrow />}
         </div>
     </CardStyles>
   );
