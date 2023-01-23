@@ -11,28 +11,13 @@ export default function Stuffs() {
         {
             title: 'Spooky Video',
             description: "Dad made this for visuals for a Halloween party.",
-            imageUrl: "www.placecage.com/c/400/400"
+            imageUrl: "https://placekitten.com/400/400"
         },
         {
-            title: 'Spooky Video',
-            description: "Dad made this for visuals for a Halloween party.",
-            imageUrl: "www.placecage.com/c/400/400"
-        },
-        {
-            title: 'Spooky Video',
-            description: "Dad made this for visuals for a Halloween party.",
-            imageUrl: "www.placecage.com/c/400/400"
-        },
-        {
-            title: 'Spooky Video',
-            description: "Dad made this for visuals for a Halloween party.",
-            imageUrl: "www.placecage.com/c/400/400"
-        },
-        {
-            title: 'Spooky Video',
-            description: "Dad made this for visuals for a Halloween party.",
-            imageUrl: "www.placecage.com/c/400/400"
-        },
+            title: 'Buba',
+            description: 'Best dog in the world',
+            imageUrl: "/buba.jpg"
+        }
 ]
 
     return (

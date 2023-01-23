@@ -1,7 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import styled from 'styled-components';
-import Nav from './Nav';
 
 const CardStyles = styled.div`
   font-size: 3rem;
@@ -11,23 +9,33 @@ const CardStyles = styled.div`
   margin-top: 50px;
   transition: transform .3s; /* Animation */
 
+  --displayArrow: none;
+
   cursor: pointer;
 
   &:focus, :hover {
         transform: scale(1.1);
+        --displayArrow: unset;
   }
 
   .text-contents {
     padding: 0 1rem;
     box-sizing: border-box;
-      
-      h1{
-          font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .text{
+        
+        h1{
+            font-size: 2rem;
         }
         
         p {
             font-size: 1rem;
         }
+    }
 
 
     }
@@ -49,24 +57,44 @@ const ImageContainer = styled.div`
     position: relative !important;
     height: 100% !important;
     }
-`
+`;
+
+const Arrow = styled.div`
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+    border: solid var(--black, black);
+    border-width: 0 3px 3px 0;
+    padding: 4px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    display: var(--displayArrow);
+
+    animation: fadeIn 0.7s;
+`;
 
 // this is a link basically with a picture, title and subtitle.
 // it will take the user to a new page showing the thing. Or a modal. Maybe a modal.
 
-export default function Card() {
+export default function Card({title, description, imageUrl, action=null}) {
   return (
     <CardStyles>
         <ImageContainer>
-            <Image src="/analog-me.JPG" alt="Meangingless text" fill className={'image'}/>
+            <Image src={imageUrl} alt={title} fill className={'image'}/>
         </ImageContainer>
         <div className="text-contents">
-            <h1>
-                Me
-            </h1>
-            <p>
-                An analogue picture of me bro
-            </p>
+            <div className="text">
+                <h1>
+                    {title}
+                </h1>
+                <p>
+                    {description}
+                </p>
+            </div>
+            <Arrow />
         </div>
     </CardStyles>
   );
