@@ -12,14 +12,20 @@ export default function Stuffs() {
         {
             title: 'Spooky Video',
             description: "Dad made this for visuals for a Halloween party.",
-            imageUrl: "https://placekitten.com/400/400"
+            imageUrl: "https://placekitten.com/400/400",
         },
         {
             title: 'Buba',
             description: 'Best dog in the world',
             imageUrl: "/buba.jpg",
             action: () =>  Router.push( { pathname: `/buba`})
-        }
+        },
+        {
+            title: 'MakerzRich',
+            description: 'Educational game built in react',
+            imageUrl: "/buba.jpg",
+            action: () =>  Router.push( { pathname: `/buba`})
+        },
 ]
 
     return (
