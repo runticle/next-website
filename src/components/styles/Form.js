@@ -1,7 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
 const Form = styled.form`
-  border: 5px solid var(--lightGreen, lightgreen);
   padding: 20px;
   font-size: 1.5rem;
   line-height: 1.5;
@@ -16,9 +15,11 @@ const Form = styled.form`
   textarea,
   select {
     width: 100%;
-    padding: 0.5rem;
-    font-size: 1.2rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    font-size: 2rem;
     line-height: 2rem;
+    height: var(--inputHeight);
     border: 2px solid var(--lightGreen, lightgreen);
 
     &:focus {
@@ -26,13 +27,18 @@ const Form = styled.form`
       border-color: var(--darkGreen, darkGreen);
     }
   }
+  textarea {
+    height: calc(var(--inputHeight) * 2);
+  }
   button,
   input[type='submit'] {
     width: 100%;
+    height: var(--inputHeight);
     background: var(--lightGreen, lightGreen);
     border: 0;
+    margin-top: 1rem;
     font-size: 2rem;
-    padding: 0.5rem 1.2rem;
+    /* padding: 0.5rem 1.2rem; */
   }
   fieldset{
     border: 0;

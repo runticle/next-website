@@ -37,6 +37,7 @@ const GlobalStyles = createGlobalStyle`
       --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
       --footerHeight: 50px;
       --borderWidth: 5px;
+      --inputHeight: 80px;
       box-sizing: border-box;
       font-size: 62.5%; // set defalt font size to 10px.
       height: 100%;

@@ -1,4 +1,5 @@
 import AboutMe from '@/components/AboutMe'
+import Stuffs from '@/components/Stuffs'
 import Head from 'next/head'
 import Image from 'next/image'
 
@@ -12,12 +13,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AboutMe />
-      <div>
-        {/* pic of me from holiday
-        title
-        intro 
-        footer */}
-      </div>
     </>
   )
 }
