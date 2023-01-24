@@ -27,7 +27,7 @@ const ImageContainer = styled.div`
 
 const TextContainer = styled.div`
     width: 60%;
-    padding-right: 2rem;
+    padding-right: var(--spacing);
     
 `
 

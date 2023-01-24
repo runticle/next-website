@@ -6,7 +6,7 @@ const CardStyles = styled.div`
   z-index: 2;
   width: 80%;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: calc(var(--spacing) * 2);
   transition: transform .3s;
 
   --displayArrow: none;
@@ -19,7 +19,7 @@ const CardStyles = styled.div`
   }
 
   .text-contents {
-    padding: 0 1rem;
+    padding: 0 var(--spacing);
     box-sizing: border-box;
     display: flex;
     flex-direction: row;

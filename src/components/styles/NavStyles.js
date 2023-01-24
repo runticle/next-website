@@ -9,7 +9,7 @@ const NavStyles = styled.ul`
   font-family: 'regular', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
   a,
   button {
-    padding: 1rem 3rem;
+    padding: var(--spacing) calc((var(--spacing) * 2));
     display: flex;
     align-items: center;
     position: relative;
