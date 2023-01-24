@@ -5,20 +5,20 @@ import Nav from './Nav';
 const Logo = styled.h1`
   font-size: 3rem;
   z-index: 2;
-  margin-left: 2rem;
+  margin-left: calc(var(--spacing) * 2);
   position: relative;
   a {
     color: var(--black, black);
     text-decoration: none;
     text-transform: uppercase;
-    padding: 0.5rem 1rem;
+    padding: calc(var(--spacing) / 2) var(--spacing);
   }
 `;
 
 const HeaderStyles = styled.header`
   .bar {
     border-bottom: var(--borderWidth, 5px) solid var(--lightGreen, lightGreen);
-    padding: 1rem;
+    padding: var(--spacing);
     display: grid;
     grid-template-columns: auto 1fr;
     justify-content: space-between;
@@ -33,7 +33,7 @@ export default function Header() {
         <Logo>
           <Link href="/">Alfie Freeman</Link>
         </Logo>
-        <Nav/>
+        <Nav />
       </div>
     </HeaderStyles>
   );

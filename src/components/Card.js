@@ -6,7 +6,7 @@ const CardStyles = styled.div`
   z-index: 2;
   width: 80%;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: calc(var(--spacing) * 2);
   transition: transform .3s;
 
   --displayArrow: none;
@@ -19,7 +19,7 @@ const CardStyles = styled.div`
   }
 
   .text-contents {
-    padding: 0 1rem;
+    padding: 0 var(--spacing);
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -79,23 +79,23 @@ const Arrow = styled.div`
 // this is a link basically with a picture, title and subtitle.
 // it will take the user to a new page showing the thing. Or a modal. Maybe a modal.
 
-export default function Card({title, description, imageUrl, action=null}) {
-  return (
-    <CardStyles onClick={action} action={action}>
-        <ImageContainer>
-            <Image src={imageUrl} alt={title} fill className={'image'}/>
-        </ImageContainer>
-        <div className="text-contents">
-            <div className="text">
-                <h1>
-                    {title}
-                </h1>
-                <p>
-                    {description}
-                </p>
+export default function Card({ title, description, imageUrl, action = null }) {
+    return (
+        <CardStyles onClick={action} action={action}>
+            <ImageContainer>
+                <Image src={imageUrl} alt={title} fill className={'image'} />
+            </ImageContainer>
+            <div className="text-contents">
+                <div className="text">
+                    <h1>
+                        {title}
+                    </h1>
+                    <p>
+                        {description}
+                    </p>
+                </div>
+                {!!action && <Arrow />}
             </div>
-            {!!action && <Arrow />}
-        </div>
-    </CardStyles>
-  );
+        </CardStyles>
+    );
 }

@@ -38,6 +38,7 @@ const GlobalStyles = createGlobalStyle`
       --footerHeight: 50px;
       --borderWidth: 5px;
       --inputHeight: 80px;
+      --spacing: 20px; // used for all generic passing and margin etc.
       box-sizing: border-box;
       font-size: 62.5%; // set defalt font size to 10px.
       height: 100%;
@@ -79,7 +80,7 @@ const GlobalStyles = createGlobalStyle`
 const InnerStyles = styled.div`
   max-width: var(--maxWidth);
   margin: 0 auto;
-  padding: 4rem;
+  padding: var(--spacing);
 `;
 
 export default function Page({ children }) {

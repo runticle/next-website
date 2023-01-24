@@ -20,7 +20,7 @@ const FooterStyles = styled.div`
 
 
 export default function Footer() {
-    return(
+    return (
         <FooterStyles>
             {/* TODO some bs quote, site links lol */}
             <p>
