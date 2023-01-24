@@ -33,7 +33,7 @@ export default function Header() {
         <Logo>
           <Link href="/">Alfie Freeman</Link>
         </Logo>
-        <Nav/>
+        <Nav />
       </div>
     </HeaderStyles>
   );

@@ -79,23 +79,23 @@ const Arrow = styled.div`
 // this is a link basically with a picture, title and subtitle.
 // it will take the user to a new page showing the thing. Or a modal. Maybe a modal.
 
-export default function Card({title, description, imageUrl, action=null}) {
-  return (
-    <CardStyles onClick={action} action={action}>
-        <ImageContainer>
-            <Image src={imageUrl} alt={title} fill className={'image'}/>
-        </ImageContainer>
-        <div className="text-contents">
-            <div className="text">
-                <h1>
-                    {title}
-                </h1>
-                <p>
-                    {description}
-                </p>
+export default function Card({ title, description, imageUrl, action = null }) {
+    return (
+        <CardStyles onClick={action} action={action}>
+            <ImageContainer>
+                <Image src={imageUrl} alt={title} fill className={'image'} />
+            </ImageContainer>
+            <div className="text-contents">
+                <div className="text">
+                    <h1>
+                        {title}
+                    </h1>
+                    <p>
+                        {description}
+                    </p>
+                </div>
+                {!!action && <Arrow />}
             </div>
-            {!!action && <Arrow />}
-        </div>
-    </CardStyles>
-  );
+        </CardStyles>
+    );
 }
