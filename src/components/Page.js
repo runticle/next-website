@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
+import Footer from './Footer';
 import Header from './Header';
 
 const GlobalStyles = createGlobalStyle`
@@ -34,6 +35,8 @@ const GlobalStyles = createGlobalStyle`
       --darkGreen: #26402a;
       --maxWidth: 1400px;
       --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
+      --footerHeight: 50px;
+      --borderWidth: 5px;
       box-sizing: border-box;
       font-size: 62.5%; // set defalt font size to 10px.
       height: 100%;
@@ -47,6 +50,7 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'rounded', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         padding: 0;
         margin: 0;
+        margin-bottom: var(--footerHeight, 100px);
         font-size:1.5rem;
         line-height: 2;
         min-height: 100%;
@@ -83,6 +87,7 @@ export default function Page({ children }) {
       <GlobalStyles />
       <Header />
       <InnerStyles>{children}</InnerStyles>
+      <Footer />
     </div>
   );
 }

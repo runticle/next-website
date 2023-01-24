@@ -17,7 +17,7 @@ const Logo = styled.h1`
 
 const HeaderStyles = styled.header`
   .bar {
-    border-bottom: 5px solid var(--lightGreen, lightGreen);
+    border-bottom: var(--borderWidth, 5px) solid var(--lightGreen, lightGreen);
     padding: 1rem;
     display: grid;
     grid-template-columns: auto 1fr;
