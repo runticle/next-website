@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import Nav from './Nav';
 
-const Logo = styled.h1`
+export const Logo = styled.h1`
   font-size: 3rem;
   z-index: 2;
   margin-left: 2rem;
@@ -33,7 +33,7 @@ export default function Header() {
         <Logo>
           <Link href="/">Alfie Freeman</Link>
         </Logo>
-        <Nav/>
+        <Nav />
       </div>
     </HeaderStyles>
   );
