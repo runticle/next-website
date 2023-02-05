@@ -3,9 +3,13 @@ import styled from "styled-components"
 import Card from "./Card"
 import NothingToSee from "./NothingToSee"
 
-const StuffsStyles =styled.div`
+const StuffsStyles = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+
+    @media screen and (max-width: 767px) {
+        display: block;
+    }
 `
 
 export default function Stuffs() {
@@ -19,15 +23,15 @@ export default function Stuffs() {
             title: 'Buba',
             description: 'Best dog in the world',
             imageUrl: "/buba.jpg",
-            action: () =>  Router.push( { pathname: `/buba`})
+            action: () => Router.push({ pathname: `/buba` })
         },
         {
             title: 'MakerzRich',
             description: 'Educational game built in react',
             imageUrl: "/buba.jpg",
-            action: () =>  Router.push( { pathname: `/buba`})
+            action: () => Router.push({ pathname: `/buba` })
         },
-]
+    ]
 
     if (!stuff.length) {
         return <NothingToSee />
