@@ -5,6 +5,10 @@ const AboutMeStyles = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    @media screen and (max-width: 767px) {
+        flex-direction: column-reverse;
+    }
 `
 
 const ImageContainer = styled.div`
@@ -12,6 +16,10 @@ const ImageContainer = styled.div`
     height: 40vh;
     border-radius: 80% 0;
     overflow: hidden;
+
+    @media screen and (max-width: 767px) {
+        width: 100%;
+    }
 
     > div {
     position: unset !important;
@@ -28,6 +36,12 @@ const ImageContainer = styled.div`
 const TextContainer = styled.div`
     width: 60%;
     padding-right: 2rem;
+
+    @media screen and (max-width: 767px) {
+        width: 100%;
+    }
+
+    padding-bottom: 100px; // TODO REMOVE AND FIX FOOTER
     
 `
 
@@ -46,7 +60,7 @@ export default function AboutMe() {
                 </p>
             </TextContainer>
             <ImageContainer>
-                <Image src="/analog-me.JPG" alt="Me" fill className={'image'}/>
+                <Image src="/analog-me.JPG" alt="Me" fill className={'image'} />
             </ImageContainer>
         </AboutMeStyles>
     )
