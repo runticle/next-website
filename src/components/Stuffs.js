@@ -1,6 +1,7 @@
 import Router from "next/router"
 import styled from "styled-components"
 import Card from "./Card"
+import NothingToSee from "./NothingToSee"
 
 const StuffsStyles =styled.div`
     display: grid;
@@ -27,6 +28,10 @@ export default function Stuffs() {
             action: () =>  Router.push( { pathname: `/buba`})
         },
 ]
+
+    if (!stuff.length) {
+        return <NothingToSee />
+    }
 
     return (
         <StuffsStyles>
