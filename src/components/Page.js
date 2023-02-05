@@ -22,6 +22,7 @@ const GlobalStyles = createGlobalStyle`
         font-weight: normal;
         font-style: normal;
     }
+
    /* setup variables */
    html {
       --red: #ff0000;
@@ -55,12 +56,11 @@ const GlobalStyles = createGlobalStyle`
         margin-bottom: var(--footerHeight, 100px);
         font-size:1.5rem;
         line-height: 2;
-        min-height: 100%;
-        background: linear-gradient(
-            to bottom,
-            var(--lightGreen),
-            var(--darkGreen)
-        )
+        height: 100vh;
+        background: linear-gradient(140deg, var(--lightGreen) 0%, var(--darkGreen) 100%); 
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
     }
 
     a {

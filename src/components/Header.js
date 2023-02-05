@@ -2,16 +2,15 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import Nav from './Nav';
 
-const Logo = styled.h1`
+export const Logo = styled.h1`
   font-size: 3rem;
   z-index: 2;
-  margin-left: calc(var(--spacing) * 2);
   position: relative;
   a {
     color: var(--black, black);
     text-decoration: none;
     text-transform: uppercase;
-    padding: calc(var(--spacing) / 2) var(--spacing);
+    padding: 0;
   }
 `;
 
