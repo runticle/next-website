@@ -5,20 +5,19 @@ import Nav from './Nav';
 export const Logo = styled.h1`
   font-size: 3rem;
   z-index: 2;
-  margin-left: 2rem;
   position: relative;
   a {
     color: var(--black, black);
     text-decoration: none;
     text-transform: uppercase;
-    padding: 0.5rem 1rem;
+    padding: 0;
   }
 `;
 
 const HeaderStyles = styled.header`
   .bar {
     border-bottom: var(--borderWidth, 5px) solid var(--lightGreen, lightGreen);
-    padding: 1rem;
+    padding: var(--spacing);
     display: grid;
     grid-template-columns: auto 1fr;
     justify-content: space-between;

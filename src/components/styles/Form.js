@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
 const Form = styled.form`
-  padding: 20px;
+  padding: var(--spacing);
   font-size: 1.5rem;
   line-height: 1.5;
   max-width: 1000px;
@@ -15,8 +15,8 @@ const Form = styled.form`
   textarea,
   select {
     width: 100%;
-    padding: 1rem;
-    margin-top: 1rem;
+    padding: var(--spacing);
+    margin-top: var(--spacing);
     font-size: 2rem;
     line-height: 2rem;
     height: var(--inputHeight);
@@ -36,7 +36,7 @@ const Form = styled.form`
     height: var(--inputHeight);
     background: var(--lightGreen, lightGreen);
     border: 0;
-    margin-top: 1rem;
+    margin-top: var(--spacing);
     font-size: 2rem;
     /* padding: 0.5rem 1.2rem; */
   }

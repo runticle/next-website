@@ -17,7 +17,7 @@ const Desktop = styled.ul`
 
   a,
   button {
-    padding: 1rem 3rem;
+    padding: var(--spacing) var(--spacing);
     display: flex;
     align-items: center;
     position: relative;

@@ -1,5 +1,5 @@
-import Image from "next/image";
-import styled from "styled-components";
+import Image from 'next/image';
+import styled from 'styled-components';
 
 const AboutMeStyles = styled.div`
     display: flex;
@@ -35,7 +35,7 @@ const ImageContainer = styled.div`
 
 const TextContainer = styled.div`
     width: 60%;
-    padding-right: 2rem;
+    padding-right: var(--spacing);
 
     @media screen and (max-width: 767px) {
         width: 100%;
@@ -43,25 +43,29 @@ const TextContainer = styled.div`
 
     padding-bottom: 100px; // TODO REMOVE AND FIX FOOTER
     
-`
+`;
 
 export default function AboutMe() {
+    const title = `Hi, I'm Alfie`
+    const subtitle = `I'm a web developer with extensive experience in React, React Native, and NodeJS.`
+    const description = `I have been in the software world officially for 4 years, but my interest spans far longer. 10 years ago I took a year out of university to build a bitcoin brokerage company. This led to the self taught development of a website built in html, php, and javascript. It was awful, but that's where it all began...`
+
     return (
         <AboutMeStyles>
             <TextContainer>
                 <h1>
-                    {"Hi, I'm Alfie"}
+                    {title}
                 </h1>
                 <h2>
-                    {"I'm a web developer with extensive experience in React, React Native, and NodeJS."}
+                    {subtitle}
                 </h2>
                 <p>
-                    {"I have been in the software world officially for 4 years, but my interest spans far longer. 10 years ago I took a year out of university to build a bitcoin brokerage company. This led to the self taught development of a website built in html, php, and javascript. It was awful, but that's where it all began..."}
+                    {description}
                 </p>
             </TextContainer>
             <ImageContainer>
                 <Image src="/analog-me.JPG" alt="Me" fill className={'image'} />
-            </ImageContainer>
-        </AboutMeStyles>
-    )
+            </ImageContainer >
+        </AboutMeStyles >
+    );
 }
