@@ -10,6 +10,7 @@ const FooterStyles = styled.div`
     position: fixed;
     margin: 0;
     padding: 0;
+    background-color: var(--darkGreen);
 
     display: flex;
     align-items: center;
@@ -20,7 +21,7 @@ const FooterStyles = styled.div`
 
 
 export default function Footer() {
-    return(
+    return (
         <FooterStyles>
             {/* TODO some bs quote, site links lol */}
             <p>
