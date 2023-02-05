@@ -136,8 +136,8 @@ export default function Nav() {
   const [toggle, toggleMenu] = useState(false);
 
   const links = <>
-    <Link onClick={() => toggleMenu(false)} href="/stuff">Stuff</Link>
     <Link onClick={() => toggleMenu(false)} href="/">Home</Link>
+    <Link onClick={() => toggleMenu(false)} href="/stuff">Stuff</Link>
     <Link onClick={() => toggleMenu(false)} href="/photos">Photos</Link>
     <Link onClick={() => toggleMenu(false)} href="/contact">Contact</Link>
   </>
