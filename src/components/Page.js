@@ -22,6 +22,7 @@ const GlobalStyles = createGlobalStyle`
         font-weight: normal;
         font-style: normal;
     }
+
    /* setup variables */
    html {
       --red: #ff0000;
@@ -38,6 +39,7 @@ const GlobalStyles = createGlobalStyle`
       --footerHeight: 50px;
       --borderWidth: 5px;
       --inputHeight: 80px;
+      --spacing: 20px; // used for all generic passing and margin etc.
       box-sizing: border-box;
       font-size: 62.5%; // set defalt font size to 10px.
       height: 100%;
@@ -54,12 +56,11 @@ const GlobalStyles = createGlobalStyle`
         margin-bottom: var(--footerHeight, 100px);
         font-size:1.5rem;
         line-height: 2;
-        min-height: 100%;
-        background: linear-gradient(
-            to bottom,
-            var(--lightGreen),
-            var(--darkGreen)
-        )
+        height: 100vh;
+        background: linear-gradient(140deg, var(--lightGreen) 0%, var(--darkGreen) 100%); 
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
     }
 
     a {
@@ -79,7 +80,7 @@ const GlobalStyles = createGlobalStyle`
 const InnerStyles = styled.div`
   max-width: var(--maxWidth);
   margin: 0 auto;
-  padding: 4rem;
+  padding: var(--spacing);
 `;
 
 export default function Page({ children }) {
