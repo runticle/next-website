@@ -78,29 +78,39 @@ const Mobile = styled.div`
     animation-name: fadeInOpacity;
     animation-iteration-count: 1;
     animation-timing-function: ease-in;
-    animation-duration: 0.2s;
+    animation-duration: 0.3s;
 
     @keyframes fadeInOpacity {
-      0% { opacity: 0};
+      0% { 
+        opacity: 0;
+        color: black;
+      };
       
-      100% { opacity: 1; }
+      100% { 
+        opacity: 1; 
+        color: white;
+      }
     }
 
     .top-section {
-      margin: 20px;
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: auto 1fr;
       justify-content: space-between;
-      align-items: center;
+      align-items: stretch;
+      padding: var(--spacing);
+      border-bottom: var(--borderWidth, 5px) solid var(--lightGreen, lightGreen);
 
       h1 {
         padding: 0;
         margin: 0;
-        line-height: 3rem;
+        font-size: 3rem;
+        margin: var(--spacing) 0;
       }
   
       p {
         margin: 0;
+        margin-left: auto;
+        align-self: center;
       }
     }
     
