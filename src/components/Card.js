@@ -55,7 +55,7 @@ const CardStyles = styled.div`
 
 const ImageContainer = styled.div`
     width: 100%;
-    height: 300px;
+    height: 400px;
     border-radius: 15px;
     overflow: hidden;
 
