@@ -1,4 +1,5 @@
 import AboutMe from '@/components/AboutMe'
+import Leaves from '@/components/Leaves'
 import Skills from '@/components/Skills'
 import Strengths from '@/components/Strengths'
 import Stuffs from '@/components/Stuffs'
@@ -17,6 +18,7 @@ export default function Home() {
       <AboutMe />
       <Skills />
       <Strengths />
+      <Leaves />
     </>
   )
 }
