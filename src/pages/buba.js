@@ -4,7 +4,7 @@ import Stuffs from '@/components/Stuffs';
 import TextBlock from '@/components/TextBlock';
 
 export default function Buba() {
-  const base = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/c_fill,w_300,h_300/v1675682672/buba-stills/`
+  const base = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/c_fill,w_500,h_500/v1675682672/buba-stills/`
 
   const bubaArray = bubaPhotoKeys.map(i => base + i + '.jpg')
 
@@ -16,8 +16,8 @@ export default function Buba() {
   }))
 
   const introduction = [
-    'Here is a selection of photos of my greatest friend, Buba.',
-    'I found her in Poland in 2019. Well, she found me.',
+    'Here is a selection of photos of the best dog ever, Buba.',
+    'I found her in Poland in 2019.',
     'I think she might be a mix between a mini pinscher and a jack russell, but I do not know for sure.',
   ]
 
