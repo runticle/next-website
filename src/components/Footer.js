@@ -11,6 +11,7 @@ const FooterStyles = styled.div`
     margin: 0;
     padding: 0;
     background-color: var(--darkGreen);
+    z-index: 9999;
 
     display: flex;
     align-items: center;
