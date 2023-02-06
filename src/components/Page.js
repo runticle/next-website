@@ -32,8 +32,9 @@ const GlobalStyles = createGlobalStyle`
       --lightGrey: #e1e1e1;
       --lightGray: var(--lightGrey);
       --offWhite: #ededed;
-      --lightGreen: #8bbb93;
-      --darkGreen: #26402a;
+      --lightGreen: #d6efc7;
+      --darkGreen: #194e48;
+      --middleGreen: #98ba7d;
       --maxWidth: 1400px;
       --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
       --footerHeight: 50px;
@@ -57,7 +58,7 @@ const GlobalStyles = createGlobalStyle`
         font-size:1.5rem;
         line-height: 2;
         height: 100vh;
-        background: linear-gradient(140deg, var(--lightGreen) 0%, var(--darkGreen) 100%); 
+        background: linear-gradient(170deg, var(--lightGreen) 0%, var(--middleGreen) 50%, var(--darkGreen) 100%); 
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;

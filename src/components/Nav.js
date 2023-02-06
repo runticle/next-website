@@ -70,7 +70,7 @@ const Mobile = styled.div`
     top: 0;
     bottom: 0;
 
-    background: linear-gradient(25deg, var(--lightGreen) 0%, var(--darkGreen) 100%); ;
+    background: linear-gradient(15deg, var(--lightGreen) 0%, var(--middleGreen) 50%, var(--darkGreen) 100%);
 
     z-index: 2;
 
