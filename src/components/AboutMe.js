@@ -48,7 +48,8 @@ const TextContainer = styled.div`
 export default function AboutMe() {
     const title = `Hi, I'm Alfie`
     const subtitle = `I'm a web developer with extensive experience in React, React Native, and NodeJS.`
-    const description = `I have been in the software world officially for 4 years, but my interest spans far longer. 10 years ago I took a year out of university to build a bitcoin brokerage company. This led to the self taught development of a website built in html, php, and javascript. It was awful, but that's where it all began...`
+    // const description = `I have been in the software world officially for 4 years, but my interest spans far longer. 10 years ago I took a year out of university to build a bitcoin brokerage company. This led to the self taught development of a website built in html, php, and javascript. It was awful, but that's where it all began...`
+    const description = `Officially been in the software world for 4 years, but have dabbled for much longer. Founded a successful Bitcoin Brokerage in 2013. Most recently worked at LeSalon - a startup based in London.`
 
     return (
         <AboutMeStyles>
