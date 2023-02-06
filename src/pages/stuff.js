@@ -4,23 +4,23 @@ import Router from 'next/router'
 
 export default function Stuff() {
   const stuff = [
-    {
-      title: 'Spooky Video',
-      description: "Dad made this for visuals for a Halloween party.",
-      imageUrl: "https://res.cloudinary.com/dvvgwzzwu/image/upload/v1675682774/buba-stills/5_yzsb7g.jpg",
-    },
+    // {
+    //   title: 'Spooky Video',
+    //   description: "Dad made this for visuals for a Halloween party.",
+    //   imageUrl: "https://res.cloudinary.com/dvvgwzzwu/image/upload/v1675682774/buba-stills/5_yzsb7g.jpg",
+    // },
     {
       title: 'Buba',
-      description: 'Best dog in the world',
+      description: 'Photos of my best pal',
       imageUrl: "/buba.jpg",
       action: () => Router.push({ pathname: `/buba` })
     },
-    {
-      title: 'MakerzRich',
-      description: 'Educational game built in react',
-      imageUrl: "/buba.jpg",
-      action: () => Router.push({ pathname: `/buba` })
-    },
+    // {
+    //   title: 'MakerzRich',
+    //   description: 'Educational game built in react',
+    //   imageUrl: "/buba.jpg",
+    //   action: () => Router.push({ pathname: `/buba` })
+    // },
   ]
 
   return (
