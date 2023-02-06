@@ -48,14 +48,14 @@ const TextContainer = styled.div`
 export default function AboutMe() {
 
     const title = `Hi, I'm Alfie`
-    const subtitle = `A web developer.`
+    const subtitle = `A web developer`
     const description =
         [
-            `I have officially been in the software world for 4 years, but have had my toes dipped for a little longer.`,
-            `I co-founded a successful Bitcoin Brokerage in 2013.`,
-            `Most recently worked at LeSalon - a startup based in London.`,
-            `Went travelling for ages`,
-            `Looking for my next adventure`,
+            `I have officially been in the software world for 4 years, but have had my toes dipped for a little longer`,
+            `I co-founded a successful Bitcoin Brokerage in 2013`,
+            `I most recently worked at LeSalon - a startup based in London`,
+            `Then I went travelling for ages`,
+            `Now I am looking for my next adventure`,
         ]
 
 

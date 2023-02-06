@@ -26,7 +26,7 @@ export default function Footer() {
         <FooterStyles>
             {/* TODO some bs quote, site links lol */}
             <p>
-                Alfie Freeman 2023
+                ©️ Alfie Freeman 2023
             </p>
         </FooterStyles>
     )

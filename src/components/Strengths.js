@@ -20,13 +20,12 @@ export default function Strengths() {
         'passionate',
         'Adaptable',
         'curious',
-        'really weird'
     ]
 
     return (
         <SkillsStyle>
             <h1>
-                I consider myself <TypeWriter words={strengths} />
+                I think I am <TypeWriter words={strengths} />
             </h1>
         </SkillsStyle >
 
