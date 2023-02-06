@@ -48,7 +48,7 @@ const TextContainer = styled.div`
 export default function AboutMe() {
 
     const title = `Hi, I'm Alfie`
-    const subtitle = `A web developer.`
+    const subtitle = `A web developer`
     const description =
         [
             `I have officially been in the software world for 4 years, but have had my toes dipped for a little longer`,
