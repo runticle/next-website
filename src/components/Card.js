@@ -11,11 +11,23 @@ const CardStyles = styled.div`
 
   --displayArrow: none;
 
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: var(--spacing);
+
+    --displayArrow: unset
+  }
+
   cursor: ${props => !!props.action ? 'pointer' : 'unset'};
 
   &:focus, :hover {
         transform: scale(1.1);
         --displayArrow: unset;
+
+        @media screen and (max-width: 767px) {
+            transform: unset;
+        }
   }
 
   .text-contents {
@@ -61,10 +73,10 @@ const ImageContainer = styled.div`
 
 const Arrow = styled.div`
 
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
 
     border: solid var(--black, black);
     border-width: 0 3px 3px 0;
@@ -85,17 +97,23 @@ export default function Card({ title, description, imageUrl, action = null }) {
             <ImageContainer>
                 <Image src={imageUrl} alt={title} fill className={'image'} />
             </ImageContainer>
-            <div className="text-contents">
-                <div className="text">
-                    <h1>
-                        {title}
-                    </h1>
-                    <p>
-                        {description}
-                    </p>
+            {!!title || !!description ?
+                <div className="text-contents">
+                    <div className="text">
+                        {!!title &&
+                            <h1>
+                                {title}
+                            </h1>
+                        }
+                        {!!description &&
+                            <p>
+                                {description}
+                            </p>
+                        }
+                    </div>
+                    {!!action && <Arrow />}
                 </div>
-                {!!action && <Arrow />}
-            </div>
+                : null}
         </CardStyles>
     );
 }
