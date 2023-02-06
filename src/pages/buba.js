@@ -14,7 +14,6 @@ export default function Buba() {
     action: null
   }))
 
-  console.log('cloudname', process.env)
   return (
     <>
       <Head>
