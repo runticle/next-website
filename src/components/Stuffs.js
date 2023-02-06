@@ -1,4 +1,3 @@
-import Router from "next/router"
 import styled from "styled-components"
 import Card from "./Card"
 import NothingToSee from "./NothingToSee"
@@ -6,33 +5,14 @@ import NothingToSee from "./NothingToSee"
 const StuffsStyles = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    padding-bottom: 100px;
 
     @media screen and (max-width: 767px) {
         display: block;
     }
 `
 
-export default function Stuffs() {
-    const stuff = [
-        {
-            title: 'Spooky Video',
-            description: "Dad made this for visuals for a Halloween party.",
-            imageUrl: "https://placekitten.com/400/400",
-        },
-        {
-            title: 'Buba',
-            description: 'Best dog in the world',
-            imageUrl: "/buba.jpg",
-            action: () => Router.push({ pathname: `/buba` })
-        },
-        {
-            title: 'MakerzRich',
-            description: 'Educational game built in react',
-            imageUrl: "/buba.jpg",
-            action: () => Router.push({ pathname: `/buba` })
-        },
-    ]
-
+export default function Stuffs({ stuff }) {
     if (!stuff.length) {
         return <NothingToSee />
     }
