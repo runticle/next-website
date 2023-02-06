@@ -19,7 +19,7 @@ export default function Home() {
       <AboutMe />
       <Skills />
       <Strengths />
-      {/* <Timeline /> */}
+      <Timeline />
 
       {/* Leave at the bottom 🍃*/}
       <Leaves />
