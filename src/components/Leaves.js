@@ -71,32 +71,36 @@ const LeavesStyle = styled.div`
   @keyframes fall{
     0%{
       top:-100px;
-      transform:translateX(0);
+      transform:translateX(0) rotate(0);
     }
     50%{
-      transform:translate(100px);
+      transform:translateX(70px) rotate(80deg);
+    }
+    90%{
+      transform:translateX(40px) rotate(40deg);
+      top: 99vh;
     }
     100%{
       top:100vh;
-      transform:translateX(-200px);
+      transform:translateX(40px) rotate(60deg);
     }
 }
 
 `
 
 export default function Leaves() {
-    return (
-        <LeavesStyle>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-        </LeavesStyle>
-    )
+  return (
+    <LeavesStyle>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+      <div class="leaf"></div>
+    </LeavesStyle>
+  )
 }
