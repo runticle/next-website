@@ -25,7 +25,7 @@ export default function Strengths() {
     return (
         <SkillsStyle>
             <h1>
-                I think I am <TypeWriter words={strengths} />
+                I am <TypeWriter words={strengths} />
             </h1>
         </SkillsStyle >
 

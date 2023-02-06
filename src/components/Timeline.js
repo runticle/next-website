@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CVDownload from './CVDownload';
 
 const TimelineStyle = styled.div`
     height: 100vh;
@@ -96,9 +97,12 @@ export default function Timeline() {
 
     return (
         <TimelineStyle>
-            <h1>
-                Experience & Education
-            </h1>
+            <div>
+                <h1>
+                    Experience & Education
+                </h1>
+                <CVDownload />
+            </div>
             <div class="scrollbox">
                 {
                     experience.map(({ company, title, dateString }, index) => (
