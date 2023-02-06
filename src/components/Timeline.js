@@ -8,6 +8,11 @@ const TimelineStyle = styled.div`
     max-width: 1000px;
     margin: 0 auto;
 
+    @media screen and (max-width: 767px) {
+        flex-direction: column;
+    }
+
+
     .scrollbox {
         height: 50vh;
         width: 100%;
@@ -19,7 +24,7 @@ const TimelineStyle = styled.div`
         }
 
         scroll-snap-type: y mandatory;
-        /* box-shadow: inset 1px 2px 5px 2px rgba(0, 0, 0, 0.2); */
+        /* box-shadow: inset 0px -10px 5px 3px #888 */
     }
         
     div > .information {
@@ -49,7 +54,8 @@ const TimeBox = styled.div`
             z-index: 2;
             border-radius: 70% 0;
             background: var(--lightGreen);;
-            padding: calc(var(--spacing) * 2);
+            padding: calc(var(--spacing) * 3);
+            box-shadow: inset 0px -2px 5px 1px var(--middleGreen);
 
             color: var(--middleGreen);
         }
@@ -75,21 +81,13 @@ const BookEnd = styled.div`
 `
 
 const Arrow = styled.div`
-    @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-    }
-
     position: absolute;
-    top: ${props => props.top ? '15%' : null};
-    bottom: ${props => props.top ? null : '15%'};
+    bottom: 4px;
     
     border: solid var(--lightGreen);
     border-width: 0 2px 2px 0;
     padding: 10px;
     transform: rotate(45deg);
-
-    animation: fadeIn 0.7s;
 `
 
 
@@ -107,7 +105,7 @@ export default function Timeline() {
                         <TimeBox key={index}>
                             {index === 0 ? <BookEnd top>
                                 Now
-                            </BookEnd> : <Arrow top />}
+                            </BookEnd> : null}
                             <div className="information">
                                 <p>
                                     {company}
