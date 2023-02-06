@@ -5,9 +5,12 @@ const AboutMeStyles = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    height: calc(100vh - 200px);
 
     @media screen and (max-width: 767px) {
         flex-direction: column-reverse;
+        text-align: center;
     }
 `
 
@@ -40,16 +43,21 @@ const TextContainer = styled.div`
     @media screen and (max-width: 767px) {
         width: 100%;
     }
-
-    padding-bottom: 100px; // TODO REMOVE AND FIX FOOTER
-    
 `;
 
 export default function AboutMe() {
+
     const title = `Hi, I'm Alfie`
-    const subtitle = `I'm a web developer with extensive experience in React, React Native, and NodeJS.`
-    // const description = `I have been in the software world officially for 4 years, but my interest spans far longer. 10 years ago I took a year out of university to build a bitcoin brokerage company. This led to the self taught development of a website built in html, php, and javascript. It was awful, but that's where it all began...`
-    const description = `Officially been in the software world for 4 years, but have dabbled for much longer. Founded a successful Bitcoin Brokerage in 2013. Most recently worked at LeSalon - a startup based in London.`
+    const subtitle = `A web developer.`
+    const description =
+        [
+            `I have officially been in the software world for 4 years, but have had my toes dipped for a little longer.`,
+            `I co-founded a successful Bitcoin Brokerage in 2013.`,
+            `Most recently worked at LeSalon - a startup based in London.`,
+            `Went travelling for ages`,
+            `Looking for my next adventure`,
+        ]
+
 
     return (
         <AboutMeStyles>
@@ -60,9 +68,7 @@ export default function AboutMe() {
                 <h2>
                     {subtitle}
                 </h2>
-                <p>
-                    {description}
-                </p>
+                {description.map((i, index) => <p key={index}>{i}</p>)}
             </TextContainer>
             <ImageContainer>
                 <Image src="/analog-me.JPG" alt="Me" fill className={'image'} />
