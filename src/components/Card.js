@@ -97,17 +97,23 @@ export default function Card({ title, description, imageUrl, action = null }) {
             <ImageContainer>
                 <Image src={imageUrl} alt={title} fill className={'image'} />
             </ImageContainer>
-            <div className="text-contents">
-                <div className="text">
-                    <h1>
-                        {title}
-                    </h1>
-                    <p>
-                        {description}
-                    </p>
+            {!!title || !!description ?
+                <div className="text-contents">
+                    <div className="text">
+                        {!!title &&
+                            <h1>
+                                {title}
+                            </h1>
+                        }
+                        {!!description &&
+                            <p>
+                                {description}
+                            </p>
+                        }
+                    </div>
+                    {!!action && <Arrow />}
                 </div>
-                {!!action && <Arrow />}
-            </div>
+                : null}
         </CardStyles>
     );
 }
