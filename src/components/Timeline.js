@@ -2,20 +2,21 @@ import styled from 'styled-components';
 import CVDownload from './CVDownload';
 
 const TimelineStyle = styled.div`
-    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     max-width: 1000px;
     margin: 0 auto;
+    flex-direction: column;
 
-    @media screen and (max-width: 767px) {
-        flex-direction: column;
+    // only for mobile
+    @media screen and (min-width: 767px) {
+        display: none;
     }
 
 
     .scrollbox {
-        height: 50vh;
+        height: 60vh;
         width: 100%;
 
         // hide scrollbar but keep scrolling
@@ -25,7 +26,6 @@ const TimelineStyle = styled.div`
         }
 
         scroll-snap-type: y mandatory;
-        /* box-shadow: inset 0px -10px 5px 3px #888 */
     }
         
     div > .information {
@@ -97,12 +97,6 @@ export default function Timeline() {
 
     return (
         <TimelineStyle>
-            <div>
-                <h1>
-                    Experience & Education
-                </h1>
-                <CVDownload />
-            </div>
             <div class="scrollbox">
                 {
                     experience.map(({ company, title, dateString }, index) => (

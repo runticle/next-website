@@ -6,6 +6,7 @@ const Form = styled.form`
   line-height: 1.5;
   max-width: 1000px;
   margin: 0 auto;
+  height: 100vh;
 
   label {
     display: block;

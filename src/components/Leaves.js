@@ -9,8 +9,9 @@ const LeavesStyle = styled.div`
     overflow:hidden;
     top:0;
     left:0;
-    box-shadow: inset 0 -2px 10px 3px rgba(0, 0, 0, 0.2);
     pointer-events: none;
+
+    border-bottom: 1px solid var(--lightGreen);
 
   .leaf{
     position: absolute;

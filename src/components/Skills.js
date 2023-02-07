@@ -18,16 +18,18 @@ h1 {
 
 export default function Skills() {
     const tech = [
-        'Javascript ',
+        'Javascript',
         'NextJS',
         'HTML5',
         'React Native',
+        'SCSS',
         'Hugo',
         'React',
         'Redux',
         'NodeJS',
         'CSS',
         'Jest',
+        'graphql',
         'AWS',
         'SQL',
     ]
@@ -35,7 +37,7 @@ export default function Skills() {
     return (
         <SkillsStyle>
             <h1>
-                My favourite tech is <TypeWriter words={tech} />
+                i can <TypeWriter words={tech} />
             </h1>
         </SkillsStyle >
 

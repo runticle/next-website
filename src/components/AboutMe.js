@@ -21,7 +21,7 @@ const ImageContainer = styled.div`
     overflow: hidden;
 
     @media screen and (max-width: 767px) {
-        width: 100%;
+        width: 100%;    
     }
 
     > div {
@@ -39,6 +39,8 @@ const ImageContainer = styled.div`
 const TextContainer = styled.div`
     width: 60%;
     padding-right: var(--spacing);
+    color: var(--lightGreen);
+    line-height: 2rem;
 
     @media screen and (max-width: 767px) {
         width: 100%;

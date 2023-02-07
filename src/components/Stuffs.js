@@ -6,6 +6,7 @@ const StuffsStyles = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding-bottom: 100px;
+    height: 100vh;
 
     @media screen and (max-width: 767px) {
         display: block;
