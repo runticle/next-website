@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import CVDownload from './CVDownload';
-import Heading from './Heading';
 
 const LifeTreeStyle = styled.div`
     height: 90vh;
@@ -193,11 +191,6 @@ export default function LifeTree() {
 
     return (
         <>
-            <Heading>
-                <h1>
-                    Experience & Education
-                </h1>
-            </Heading>
             <LifeTreeStyle>
                 <LeafLeSalon>
                     {renderLeaf(experience[0])}

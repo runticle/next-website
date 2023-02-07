@@ -1,4 +1,5 @@
 import AboutMe from '@/components/AboutMe'
+import Heading from '@/components/Heading'
 import Leaves from '@/components/Leaves'
 import LifeTree from '@/components/LifeTree'
 import Skills from '@/components/Skills'
@@ -20,8 +21,13 @@ export default function Home() {
       <AboutMe />
       <Skills />
       <Strengths />
-      <Timeline />
 
+      <Heading>
+        <h1>
+          Experience & Education
+        </h1>
+      </Heading>
+      <Timeline />
       <LifeTree />
 
       {/* Leave at the bottom 🍃*/}
