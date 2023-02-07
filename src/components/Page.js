@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
+import CVDownload from './CVDownload';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -90,6 +91,7 @@ export default function Page({ children }) {
       <GlobalStyles />
       <Header />
       <InnerStyles>{children}</InnerStyles>
+      <CVDownload />
       <Footer />
     </div>
   );
