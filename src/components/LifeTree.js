@@ -41,12 +41,13 @@ const Trunk = styled.div`
     width: var(--stemThickness, 100px);
     background-image: linear-gradient(
         to top,
-        var(--darkGreen) 0%,
-        var(--middleGreen) 50%,
-        var(--darkGreen) 100%
+        var(--middleGreen) 0%,
+        var(--middleGreen) 30%,
+        var(--lightGreen) 50%,
+        var(--middleGreen) 70%
       );
     background-size: auto 50%;
-    animation: growing 2s linear infinite;
+    animation: growing 3s linear infinite;
 
 `
 
@@ -61,21 +62,13 @@ const LeafBristol = styled.div`
     text-align: center;
     z-index: 2;
     border-radius: 70% 0;
-       background-image: linear-gradient(
-        to top,
+    background-image: linear-gradient(
+        -38deg,
         var(--lightGreen) 0%,
         var(--middleGreen) 50%,
         var(--lightGreen) 100%
     );
     padding: calc(var(--spacing) * 2);
-    box-shadow: inset 0px -2px 5px 1px var(--middleGreen);
-
-    background-image: linear-gradient(
-        to top,
-        var(--lightGreen) 0%,
-        var(--middleGreen) 50%,
-        var(--lightGreen) 100%
-    );
 
     .information {
         transform: rotate(-20deg);
@@ -94,13 +87,12 @@ const LeafQuickCoins = styled.div`
     z-index: 2;
     border-radius:0 70% ;
        background-image: linear-gradient(
-        to top,
+        38deg,
         var(--lightGreen) 0%,
         var(--middleGreen) 50%,
         var(--lightGreen) 100%
     );;
     padding: calc(var(--spacing) * 2);
-    box-shadow: inset 0px -2px 5px 1px var(--middleGreen);
 
     .information {
         transform: rotate(20deg);
@@ -120,13 +112,12 @@ const LeafEmtec = styled.div`
     z-index: 2;
     border-radius: 70% 0;
        background-image: linear-gradient(
-        to top,
+        -38deg,
         var(--lightGreen) 0%,
         var(--middleGreen) 50%,
         var(--lightGreen) 100%
     );;
     padding: calc(var(--spacing) * 2);
-    box-shadow: inset 0px -2px 5px 1px var(--middleGreen);
 
     .information {
         transform: rotate(-20deg);
@@ -147,13 +138,12 @@ const LeafMakers = styled.div`
     z-index: 2;
     border-radius: 0 70%;
        background-image: linear-gradient(
-        to top,
+        38deg,
         var(--lightGreen) 0%,
         var(--middleGreen) 50%,
         var(--lightGreen) 100%
     );;
     padding: calc(var(--spacing) * 2);
-    box-shadow: inset 0px -2px 5px 1px var(--middleGreen);
 
     .information {
         transform: rotate(20deg);
@@ -172,13 +162,12 @@ const LeafLeSalon = styled.div`
     z-index: 2;
     border-radius: 70% 0;
        background-image: linear-gradient(
-        to top,
+        -38deg,
         var(--lightGreen) 0%,
         var(--middleGreen) 50%,
         var(--lightGreen) 100%
     );;
     padding: calc(var(--spacing) * 2);
-    box-shadow: inset 0px -2px 5px 1px var(--middleGreen);
 
     .information {
         transform: rotate(-20deg);
