@@ -28,7 +28,7 @@ const BirdCage = styled.div`
     position: relative;
     bottom: var(--infoBarHeight);
 
-    background-color: blue;
+    /* background-color: blue; */
     margin: 0 auto;
 
     height: 1000px;
@@ -46,6 +46,9 @@ const InfoBar = styled.div`
 
 const LEVEL_DATA = {
     INITIAL_GUN_POSITION_X: 400,
+    BIRD_SPEED: 1, // px / tick
+    BULLET_SPEED: 2, // px / tick
+    GUN_SPEED: 2,
     LEVEL_0: {
         INITIAL_POSITIONS: [
             {
@@ -70,7 +73,7 @@ function nextBirdsPositions(currentPositions) {
     currentPositions.forEach(bird => {
         const newPosition = {
             x: bird.x,
-            y: bird.y + 3,
+            y: bird.y + LEVEL_DATA.BIRD_SPEED,
         }
 
         newPositions.push(newPosition)
@@ -85,7 +88,7 @@ function nextBulletPositions(currentPositions) {
     currentPositions.forEach(bullet => {
         const newPosition = {
             x: bullet.x,
-            y: bullet.y + 5,
+            y: bullet.y + LEVEL_DATA.BULLET_SPEED,
         }
 
         newPositions.push(newPosition)
@@ -100,10 +103,21 @@ export default function TheBirds() {
     const [timeElapsed, progressTime] = useState(0)
     const [timerPaused, toggleTimer] = useState(true)
     const [birdPositions, progressBirds] = useState(LEVEL_DATA.LEVEL_0.INITIAL_POSITIONS)
-    const [gunPosition, moveGun] = useState(LEVEL_DATA.INITIAL_GUN_POSITION_X)
+    const [gunPosition, moveGun] = useState({ x: LEVEL_DATA.INITIAL_GUN_POSITION_X, y: 0 })
     const [bulletPositions, progressBullets] = useState([])
+    const [kills, addKill] = useState(0)
     const LEVEL_TIME = 30000 // ms
-    const GAME_PULSE = 50; // ms
+    const GAME_PULSE = 10; // ms
+
+    const killbird = useCallback((birdIndex, bulletIndex) => {
+        const leftoverBullets = bulletPositions.filter((_, index) => index !== bulletIndex)
+        progressBullets(leftoverBullets)
+
+        const leftoverBirds = birdPositions.filter((_, index) => index !== birdIndex)
+        progressBirds(leftoverBirds)
+
+        addKill(prevKills => prevKills + 1)
+    }, [birdPositions, bulletPositions])
 
     // the game function.
     // fires every 100ms
@@ -138,30 +152,32 @@ export default function TheBirds() {
                     bullet.x + 10 > bird.x // bullet width
                     && bullet.x < bird.x + 50 // bird width
                     && bird.y > 1000 - bullet.y - 10 - 20
-                    // && bird.y < 1000 - bullet.y + 20 // bullet height
                 ) {
-                    console.log('hit')
-                    const leftoverBullets = bulletPositions.filter((_, index) => index !== bulletIndex)
-                    progressBullets(leftoverBullets)
-
-                    const leftoverBirds = birdPositions.filter((_, index) => index !== birdIndex)
-                    progressBirds(leftoverBirds)
+                    killbird(birdIndex, bulletIndex)
                 }
             }
         }
-    }, [timeElapsed, birdPositions, bulletPositions])
+    }, [timeElapsed, birdPositions, killbird, bulletPositions])
 
     const handleKeypress = useCallback((event) => {
         console.log('Key pressed:', event.charCode)
+        console.log(gunPosition)
 
         switch (event.charCode) {
-            // spacebar is a bullet
+            // spacebar is a bulleta
             case 32:
                 // and we need to throw a bullet into the mixer
-                progressBullets(prevBulletPositions => ([...prevBulletPositions, { x: gunPosition, y: 100 }]))
+                progressBullets(prevBulletPositions => ([...prevBulletPositions, { x: gunPosition.x, y: gunPosition.y }]))
                 break;
+            case 97: // left (a)
+                // console.log(event)
+                moveGun(prevGunPosition => ({ x: prevGunPosition.x - LEVEL_DATA.GUN_SPEED, y: 0 }))
+                break
+            case 100: // right (d)
+                moveGun(prevGunPosition => ({ x: prevGunPosition.x + LEVEL_DATA.GUN_SPEED, y: 0 }))
+                break
         }
-    }, [progressBullets, gunPosition])
+    }, [progressBullets, gunPosition, moveGun])
 
     useEventListener('keypress', handleKeypress)
 
@@ -190,7 +206,7 @@ export default function TheBirds() {
                         <Bullet key={index} position={bullet} />
                     ))
                 }
-                <Gun position={{ x: gunPosition }} />
+                <Gun position={gunPosition} />
             </BirdCage>
             <InfoBar>
                 <button onClick={() => toggleTimer(false)}>
@@ -204,11 +220,13 @@ export default function TheBirds() {
                     progressTime(0) // reset
                     progressBirds(LEVEL_DATA.LEVEL_0.INITIAL_POSITIONS) // initial
                     progressBullets([])
+                    addKill(0)
                 }
                 }>
                     Reset
                 </button>
                 <p>Time: {(timeElapsed / 1000).toFixed(2)} </p>
+                <p>Kills: {kills} </p>
             </InfoBar>
         </GameContainer>
     )
