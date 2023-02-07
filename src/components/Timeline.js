@@ -11,6 +11,12 @@ const TimelineStyle = styled.div`
 
     @media screen and (max-width: 767px) {
         flex-direction: column;
+
+    }
+
+    // only for mobile
+    @media screen and (min-width: 767px) {
+        display: none;
     }
 
 
