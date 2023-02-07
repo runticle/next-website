@@ -80,34 +80,38 @@ export default function TheBirds() {
     const [timerPaused, toggleTimer] = useState(true)
     const [birdPositions, progressBirds] = useState(LEVEL_DATA.LEVEL_0.INITIAL_POSITIONS)
 
+    // the game function.
+    // fires every 100ms
+    // update clock
+    // update bird positions
+    // update bullet positions
 
-    // console.log('timer paused', timerPaused)
-    // console.log('bird positions', birdPositions)
+    // TODO maybe sort this out, check performace
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    function updateGameStep() {
+        if (timeElapsed < LEVEL_TIME) {
+            const newBirdPositions = nextBirdsPositions(birdPositions)
+            progressBirds(newBirdPositions)
+            progressTime(prevTimeElapsed => prevTimeElapsed + 100) //ms
+        } else {
+            window.alert('GAME OVER')
+            clearInterval(interval)
+        }
+    }
 
     const LEVEL_TIME = 30000 // ms
 
     useEffect(() => {
         const interval = setInterval(() => {
-            // if paused, do nothing
-            if (timerPaused) return () => clearInterval(birdInterval);
-
-            if (timeElapsed < LEVEL_TIME) {
-                const newBirdPositions = nextBirdsPositions(birdPositions)
-                progressBirds(newBirdPositions)
-                progressTime(prevTimeElapsed => prevTimeElapsed + 100) //ms
-            } else {
-                window.alert('GAME OVER')
-                clearInterval(interval)
-            }
-
-
+            if (timerPaused) return () => clearInterval(interval);
+            updateGameStep()
         }, 100);
 
         // cleanup interval to stop a billion of them running concurrently
         return () => {
             clearInterval(interval)
         }
-    }, [timerPaused, timeElapsed, birdPositions]);
+    }, [updateGameStep, timerPaused]);
 
 
 
