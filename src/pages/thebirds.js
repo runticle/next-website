@@ -39,52 +39,86 @@ const InfoBar = styled.div`
 `
 
 
+const LEVEL_DATA = {
+    LEVEL_0: {
+        INITIAL_POSITIONS: [
+            {
+                x: 100,
+                y: -50,
+            },
+            {
+                x: 550,
+                y: 0,
+            },
+            {
+                x: 1000,
+                y: -50,
+            }
+        ]
+    }
+}
+
+function nextBirdsPositions(currentPositions) {
+    const newPositions = []
+
+    currentPositions.forEach(bird => {
+        const newPosition = {
+            x: bird.x,
+            y: bird.y + 3,
+        }
+
+        newPositions.push(newPosition)
+    })
+
+    return newPositions;
+}
+
+
 
 export default function TheBirds() {
     const [timeElapsed, progressTime] = useState(0)
     const [timerPaused, toggleTimer] = useState(true)
-    const [birdPosition, progressBird] = useState({ x: 0, y: 0 })
-    const LEVEL_TIME = 30;
+    const [birdPositions, progressBirds] = useState(LEVEL_DATA.LEVEL_0.INITIAL_POSITIONS)
+
+
+    // console.log('timer paused', timerPaused)
+    // console.log('bird positions', birdPositions)
+
+    const LEVEL_TIME = 30000 // ms
 
     useEffect(() => {
-        // setup a timer for the clock. This will control the level time.
         const interval = setInterval(() => {
-            // if paused, do nothing
-            if (timerPaused) return () => clearInterval(interval);
-
-            if (timeElapsed < LEVEL_TIME) {
-                progressTime(prevTimeElapsed => prevTimeElapsed + 1)
-            }
-            else {
-                window.alert('GAME OVER')
-                clearInterval(interval)
-            }
-        }, 1000);
-
-        // setup a timer for the birds. This will control their positions on the screen.
-        const birdInterval = setInterval(() => {
             // if paused, do nothing
             if (timerPaused) return () => clearInterval(birdInterval);
 
             if (timeElapsed < LEVEL_TIME) {
-                progressBird(({ x, y }) => ({ x: x + 5, y: y + 5 }))
+                const newBirdPositions = nextBirdsPositions(birdPositions)
+                progressBirds(newBirdPositions)
+                progressTime(prevTimeElapsed => prevTimeElapsed + 100) //ms
+            } else {
+                window.alert('GAME OVER')
+                clearInterval(interval)
             }
-            else {
-                clearInterval(birdInterval)
-            }
+
+
         }, 100);
 
         // cleanup interval to stop a billion of them running concurrently
         return () => {
             clearInterval(interval)
-            clearInterval(birdInterval)
         }
-    }, [timeElapsed, timerPaused]);
+    }, [timerPaused, timeElapsed, birdPositions]);
+
+
 
     return (
         <GameContainer>
             <BirdCage>
-                <Bird position={birdPosition} />
+                {
+                    birdPositions.map((bird, index) => (
+                        <Bird key={index} position={bird} />
+                    ))
+                }
             </BirdCage>
             <InfoBar>
                 <button onClick={() => toggleTimer(false)}>
@@ -96,12 +130,12 @@ export default function TheBirds() {
                 <button onClick={() => {
                     toggleTimer(true)
                     progressTime(0) // reset
-                    progressBird({ x: 0, y: 0 }) // initial
+                    progressBirds(LEVEL_DATA.LEVEL_0.INITIAL_POSITIONS) // initial
                 }
                 }>
                     Reset
                 </button>
-                <p>Time: {timeElapsed} </p>
+                <p>Time: {(timeElapsed / 1000).toFixed(2)} </p>
             </InfoBar>
         </GameContainer>
     )

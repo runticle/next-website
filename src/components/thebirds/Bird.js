@@ -8,11 +8,13 @@ const BirdSprite = styled.div`
     height: 20px;
 
     z-index: 10;
-    background-color: green;
+    background-color: lightgreen;
 `
 
 export default function Bird({ position }) {
     const { x, y } = position;
+
+    // console.log('Bird', position)
 
     const left = x + 'px';
     const top = y + 'px';
