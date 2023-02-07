@@ -1,5 +1,8 @@
 import Bird from "@/components/thebirds/Bird"
-import { useState, useEffect } from "react"
+import Bullet from "@/components/thebirds/Bullet"
+import Gun from "@/components/thebirds/Gun"
+import useEventListener from "@/utils/useEventListener"
+import { useState, useEffect, useCallback } from "react"
 import styled from "styled-components"
 
 const GameContainer = styled.div`
@@ -22,11 +25,14 @@ const GameContainer = styled.div`
 `
 
 const BirdCage = styled.div`
-    position: absolute;
-    top: 0;
+    position: relative;
     bottom: var(--infoBarHeight);
-    left: 0;
-    right: 0;
+
+    background-color: blue;
+    margin: 0 auto;
+
+    height: 1000px;
+    width: 1000px;
 `
 
 const InfoBar = styled.div`
@@ -38,22 +44,22 @@ const InfoBar = styled.div`
     background: red;
 `
 
-
 const LEVEL_DATA = {
+    INITIAL_GUN_POSITION_X: 400,
     LEVEL_0: {
         INITIAL_POSITIONS: [
             {
-                x: 100,
+                x: 0,
                 y: -50,
             },
             {
-                x: 550,
+                x: 390,
                 y: 0,
             },
-            {
-                x: 1000,
-                y: -50,
-            }
+            // {
+            //     x: 900,
+            //     y: -50,
+            // }
         ]
     }
 }
@@ -73,12 +79,31 @@ function nextBirdsPositions(currentPositions) {
     return newPositions;
 }
 
+function nextBulletPositions(currentPositions) {
+    const newPositions = []
+
+    currentPositions.forEach(bullet => {
+        const newPosition = {
+            x: bullet.x,
+            y: bullet.y + 5,
+        }
+
+        newPositions.push(newPosition)
+    })
+
+    return newPositions;
+}
+
 
 
 export default function TheBirds() {
     const [timeElapsed, progressTime] = useState(0)
     const [timerPaused, toggleTimer] = useState(true)
     const [birdPositions, progressBirds] = useState(LEVEL_DATA.LEVEL_0.INITIAL_POSITIONS)
+    const [gunPosition, moveGun] = useState(LEVEL_DATA.INITIAL_GUN_POSITION_X)
+    const [bulletPositions, progressBullets] = useState([])
+    const LEVEL_TIME = 30000 // ms
+    const GAME_PULSE = 50; // ms
 
     // the game function.
     // fires every 100ms
@@ -88,32 +113,69 @@ export default function TheBirds() {
 
     // TODO maybe sort this out, check performace
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    function updateGameStep() {
-        if (timeElapsed < LEVEL_TIME) {
-            const newBirdPositions = nextBirdsPositions(birdPositions)
-            progressBirds(newBirdPositions)
-            progressTime(prevTimeElapsed => prevTimeElapsed + 100) //ms
-        } else {
+    const updateGameStep = useCallback(() => {
+        // if level time is elapsed, we stop
+        if (timeElapsed >= LEVEL_TIME) {
             window.alert('GAME OVER')
             clearInterval(interval)
         }
-    }
 
-    const LEVEL_TIME = 30000 // ms
+        // calculate new bird positions and progress the ticker
+        const newBirdPositions = nextBirdsPositions(birdPositions)
+        progressBirds(newBirdPositions)
+        progressTime(prevTimeElapsed => prevTimeElapsed + GAME_PULSE) //ms
+
+
+        // check for bullets.
+        const newBulletPositions = nextBulletPositions(bulletPositions)
+        progressBullets(newBulletPositions)
+
+        // check for any collisions
+        // I will check whether any birds are in the vicinity of a bullet
+        for (const [birdIndex, bird] of birdPositions.entries()) {
+            for (const [bulletIndex, bullet] of bulletPositions.entries()) {
+                if (
+                    bullet.x + 10 > bird.x // bullet width
+                    && bullet.x < bird.x + 50 // bird width
+                    && bird.y > 1000 - bullet.y - 10 - 20
+                    // && bird.y < 1000 - bullet.y + 20 // bullet height
+                ) {
+                    console.log('hit')
+                    const leftoverBullets = bulletPositions.filter((_, index) => index !== bulletIndex)
+                    progressBullets(leftoverBullets)
+
+                    const leftoverBirds = birdPositions.filter((_, index) => index !== birdIndex)
+                    progressBirds(leftoverBirds)
+                }
+            }
+        }
+    }, [timeElapsed, birdPositions, bulletPositions])
+
+    const handleKeypress = useCallback((event) => {
+        console.log('Key pressed:', event.charCode)
+
+        switch (event.charCode) {
+            // spacebar is a bullet
+            case 32:
+                // and we need to throw a bullet into the mixer
+                progressBullets(prevBulletPositions => ([...prevBulletPositions, { x: gunPosition, y: 100 }]))
+                break;
+        }
+    }, [progressBullets, gunPosition])
+
+    useEventListener('keypress', handleKeypress)
 
     useEffect(() => {
         const interval = setInterval(() => {
             if (timerPaused) return () => clearInterval(interval);
             updateGameStep()
-        }, 100);
+        }, GAME_PULSE);
 
         // cleanup interval to stop a billion of them running concurrently
         return () => {
             clearInterval(interval)
         }
     }, [updateGameStep, timerPaused]);
-
-
 
     return (
         <GameContainer>
@@ -123,6 +185,12 @@ export default function TheBirds() {
                         <Bird key={index} position={bird} />
                     ))
                 }
+                {
+                    bulletPositions.map((bullet, index) => (
+                        <Bullet key={index} position={bullet} />
+                    ))
+                }
+                <Gun position={{ x: gunPosition }} />
             </BirdCage>
             <InfoBar>
                 <button onClick={() => toggleTimer(false)}>
@@ -135,6 +203,7 @@ export default function TheBirds() {
                     toggleTimer(true)
                     progressTime(0) // reset
                     progressBirds(LEVEL_DATA.LEVEL_0.INITIAL_POSITIONS) // initial
+                    progressBullets([])
                 }
                 }>
                     Reset
