@@ -1,5 +1,6 @@
 import AboutMe from '@/components/AboutMe'
 import Leaves from '@/components/Leaves'
+import LifeTree from '@/components/LifeTree'
 import Skills from '@/components/Skills'
 import Strengths from '@/components/Strengths'
 import Stuffs from '@/components/Stuffs'
@@ -20,6 +21,8 @@ export default function Home() {
       <Skills />
       <Strengths />
       <Timeline />
+
+      <LifeTree />
 
       {/* Leave at the bottom 🍃*/}
       <Leaves />
