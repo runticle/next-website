@@ -14,13 +14,24 @@ const BirdSprite = styled.div`
     z-index: 10;
 `
 
-export default function Bird({ positionMap = {}, gameStep }) {
+const getRandomNumberUpTo = (n) => Math.floor(Math.random() * n)
+
+export default function Bird({ positionMap = {}, gameStep, birdShit }) {
     const nextPosition = positionMap[gameStep]
     if (!nextPosition) return null
     const { x, y } = nextPosition;
 
+    // bird has to randomnly poop.
+    // function from the game file to do so, need to send back position and track that
+
     const left = x + 'px';
     const top = y + 'px';
+
+    const iShouldShit = getRandomNumberUpTo(1000) < 5;
+
+    if (iShouldShit && gameStep > 100) {
+        birdShit({ x, y })
+    }
 
     return <BirdSprite style={{ left, top }} />
 }

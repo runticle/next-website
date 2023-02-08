@@ -7,6 +7,7 @@ import { useState, useEffect, useCallback } from "react"
 import { BirdCage, GameContainer, InfoBar } from "./styles"
 
 import GAME_DATA from "./gameData"
+import Shit from "./Shit"
 
 export default function TheBirds() {
     const [userData, updateUserData] = useState(GAME_DATA.INITIAL_USER_DATA)
@@ -20,6 +21,9 @@ export default function TheBirds() {
     const [gameStatus, updateGameStatus] = useState('PLAY')
     const [gunPosition, moveGun] = useState({ x: userData.INITIAL_GUN_POSITION_X, y: 0, last: null })
 
+    const [playerHealth, editHealth] = useState(userData.INITIAL_HEALTH)
+
+    const [shitPositions, progressBirdShit] = useState([])
 
     const [buttonsDown, changeButtonStatus] = useState({
         up: false,
@@ -27,6 +31,26 @@ export default function TheBirds() {
         right: false,
         left: false,
     })
+
+    const birdShit = (position) => {
+        progressBirdShit(prevShitPositions => ([...prevShitPositions, position]))
+    }
+
+    const updateBirdShit = useCallback(() => {
+        const newShitPositions = []
+
+        shitPositions.forEach(bullet => {
+            if (bullet.y > 950) return
+            const newPosition = {
+                x: bullet.x,
+                y: bullet.y + GAME_DATA.SHIT_SPEED,
+            }
+
+            newShitPositions.push(newPosition)
+        })
+
+        progressBirdShit(newShitPositions)
+    }, [shitPositions, progressBirdShit])
 
     const updateBulletPositions = useCallback(() => {
         const newBulletPositions = []
@@ -75,7 +99,30 @@ export default function TheBirds() {
                 }
             }
         }
-    }, [bulletPositions, birdPaths, killbird, gameStep])
+
+
+        for (const [shitIndex, shit] of shitPositions.entries()) {
+
+            // this is undefined when the game ends. why?
+            const shit_x = shit.x;
+            const shit_y = shit.y;
+
+            if (
+                gunPosition.x + 10 > shit_x // gunPosition width
+                && gunPosition.x < shit_x + 10 // bird width
+                && shit_y > 1000 - gunPosition.y - 10 - 10
+                && shit_y < 1000 - gunPosition.y
+            ) {
+                console.log('SHIT!')
+
+                // damage player
+            }
+
+        }
+
+
+
+    }, [bulletPositions, birdPaths, killbird, gameStep, shitPositions, gunPosition])
 
     // TODO gun boundaries
     const updateGunPosition = useCallback(() => {
@@ -106,12 +153,15 @@ export default function TheBirds() {
         // move bullets
         updateBulletPositions(bulletPositions)
 
+        // check for any shit
+        updateBirdShit(shitPositions)
+
         // check for any collisions
         checkForCollisions()
 
         // move the gun if necessary
         updateGunPosition()
-    }, [timeElapsed, bulletPositions, progressGameStep, gameStep, checkForCollisions, updateBulletPositions, updateGunPosition])
+    }, [timeElapsed, bulletPositions, progressGameStep, gameStep, checkForCollisions, updateBulletPositions, updateGunPosition, shitPositions, updateBirdShit])
 
     const handleKeypress = useCallback((event) => {
         switch (event.charCode) {
@@ -225,12 +275,17 @@ export default function TheBirds() {
                 <BirdCage>
                     {
                         birdPaths.map((bird, index) => (
-                            <Bird key={index} positionMap={bird} gameStep={gameStep} />
+                            <Bird birdShit={birdShit} key={index} positionMap={bird} gameStep={gameStep} />
                         ))
                     }
                     {
                         bulletPositions.map((bullet, index) => (
                             <Bullet key={index} position={bullet} />
+                        ))
+                    }
+                    {
+                        shitPositions.map((shit, index) => (
+                            <Shit key={index} position={shit} />
                         ))
                     }
                     <Gun position={gunPosition} />
@@ -253,6 +308,7 @@ export default function TheBirds() {
                     progressBullets([])
                     addKill(0)
                     progressGameStep(0)
+                    progressBirdShit([])
                 }
                 }>
                     Reset
