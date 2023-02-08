@@ -13,6 +13,8 @@ const GunSprite = styled.div`
     background-repeat: no-repeat;
 
     border-radius: 50%;
+
+    z-index: 500;
 `
 
 export default function Gun({ position }) {

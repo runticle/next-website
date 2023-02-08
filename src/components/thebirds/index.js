@@ -98,9 +98,9 @@ export default function TheBirds() {
 
             for (const [bulletIndex, bullet] of bulletPositions.entries()) {
                 if (
-                    bullet.x + 10 > bird_x // bullet width
-                    && bullet.x < bird_x + GAME_DATA.BIRD_WIDTH // bird width
-                    && bird_y > 1000 - bullet.y - 10 - GAME_DATA.BIRD_HEIGHT
+                    bullet.x + GAME_DATA.BULLET_SIZE > bird_x
+                    && bullet.x < bird_x + GAME_DATA.BIRD_WIDTH
+                    && bird_y > 1000 - bullet.y - GAME_DATA.BULLET_SIZE - GAME_DATA.BIRD_HEIGHT
                     && bird_y < 1000 - bullet.y
                 ) {
                     killbird(birdIndex, bulletIndex)
@@ -114,9 +114,9 @@ export default function TheBirds() {
             const shit_y = shit.y;
 
             if (
-                gunPosition.x + 10 > shit_x // gunPosition width
-                && gunPosition.x < shit_x + 10 // bird width
-                && shit_y > 1000 - gunPosition.y - 10 - 10
+                gunPosition.x + userData.GUN_WIDTH > shit_x // gunPosition width
+                && gunPosition.x < shit_x + GAME_DATA.SHIT_SIZE // bird width
+                && shit_y > 1000 - gunPosition.y - GAME_DATA.SHIT_SIZE - userData.GUN_HEIGHT
                 && shit_y < 1000 - gunPosition.y
             ) {
                 playerHit(shitIndex)
@@ -124,7 +124,7 @@ export default function TheBirds() {
 
         }
 
-    }, [bulletPositions, birdPaths, killbird, gameStep, shitPositions, gunPosition, playerHit])
+    }, [bulletPositions, birdPaths, killbird, gameStep, shitPositions, gunPosition, playerHit, userData])
 
     // TODO gun boundaries
     const updateGunPosition = useCallback(() => {
@@ -170,7 +170,7 @@ export default function TheBirds() {
             // spacebar is a bulleta
             case 32:
                 // and we need to throw a bullet into the mixer
-                progressBullets(prevBulletPositions => ([...prevBulletPositions, { x: gunPosition.x, y: gunPosition.y }]))
+                progressBullets(prevBulletPositions => ([...prevBulletPositions, { x: gunPosition.x + (userData.GUN_WIDTH / 2) - (GAME_DATA.BULLET_SIZE / 2), y: gunPosition.y + userData.GUN_HEIGHT / 2 }]))
                 break;
             case 97: // left (a)
                 changeButtonStatus(prevStatus => ({
@@ -199,7 +199,7 @@ export default function TheBirds() {
                 }))
                 break
         }
-    }, [progressBullets, gunPosition, changeButtonStatus])
+    }, [progressBullets, gunPosition, changeButtonStatus, userData])
 
     const handleKeyUp = useCallback((event) => {
         // TODO store codes in variables 

@@ -2,7 +2,7 @@ const GAME_DATA = {
     // USER DATA
     INITIAL_USER_DATA: {
         INITIAL_GUN_POSITION_X: 245,
-        BULLET_SPEED: 10, // px / tick
+        BULLET_SPEED: 5, // px / tick
         GUN_SPEED: 3,
         INITIAL_HEALTH: 15, // hits
         GUN_WIDTH: 40,
