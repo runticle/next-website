@@ -68,6 +68,7 @@ export default function TheBirds() {
                     bullet.x + 10 > bird_x // bullet width
                     && bullet.x < bird_x + 50 // bird width
                     && bird_y > 1000 - bullet.y - 10 - 20
+                    && bird_y < 1000 - bullet.y
                 ) {
                     killbird(birdIndex, bulletIndex)
                 }
