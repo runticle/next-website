@@ -111,7 +111,6 @@ export default function TheBirds() {
     }, [timeElapsed, bulletPositions, progressGameStep, gameStep, checkForCollisions, updateBulletPositions, updateGunPosition])
 
     const handleKeypress = useCallback((event) => {
-        console.log(event.charCode)
         switch (event.charCode) {
             // spacebar is a bulleta
             case 32:
@@ -165,7 +164,6 @@ export default function TheBirds() {
                 }))
                 break
             case 'KeyD': // right (d)
-                console.log('stop')
                 changeButtonStatus(prevStatus => ({
                     up: prevStatus.up,
                     down: prevStatus.down,
@@ -202,7 +200,7 @@ export default function TheBirds() {
         }, GAME_DATA.GAME_PULSE);
 
         // if level time is elapsed, we stop
-        if (timeElapsed >= GAME_DATA.LEVEL_TIME || gameStep > 500) {
+        if (timeElapsed >= GAME_DATA.LEVEL_TIME || gameStep > 2000) {
             updateGameStatus('STOP')
             clearInterval(interval)
         }
@@ -214,7 +212,9 @@ export default function TheBirds() {
     }, [updateGameStep, timerPaused, gameStep, timeElapsed]);
 
     const generateLevel = () => {
+        console.time('Generating Level 0')
         const data = generateLevel0()
+        console.timeEnd('Generating Level 0')
 
         // set predetermined bird paths
         setBirdPaths(data)
