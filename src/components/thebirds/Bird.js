@@ -11,8 +11,15 @@ const BirdSprite = styled.div`
     background-color: lightgreen;
 `
 
-export default function Bird({ position }) {
-    const { x, y } = position;
+export default function Bird({ positionMap = {}, gameStep }) {
+    const nextPosition = positionMap[gameStep]
+    if (!nextPosition) return <div> ded </div>
+    const { x, y } = nextPosition;
+
+
+    // if (y < 0) return null 
+
+    // console.log('bird position', position)
 
     // console.log('Bird', position)
 
