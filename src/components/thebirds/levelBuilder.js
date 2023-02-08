@@ -1,6 +1,6 @@
 const level0 = [
     {
-        birdCount: 2,
+        birdCount: 1,
         gameStepStart: 0,
         maxDepth: 500
     },
@@ -8,11 +8,26 @@ const level0 = [
         birdCount: 4,
         gameStepStart: 50,
         maxDepth: 350
-
-    }, {
+    },
+    {
         birdCount: 6,
         gameStepStart: 100,
         maxDepth: 200
+    },
+    {
+        birdCount: 10,
+        gameStepStart: 400,
+        maxDepth: 240
+    },
+    {
+        birdCount: 13,
+        gameStepStart: 700,
+        maxDepth: 260
+    },
+    {
+        birdCount: 20,
+        gameStepStart: 1000,
+        maxDepth: 190
     }
 ];
 
