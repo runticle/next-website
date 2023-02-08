@@ -18,7 +18,7 @@ export default function TheBirds() {
     const [bulletPositions, progressBullets] = useState([])
     const [kills, addKill] = useState(0)
     const [gameStatus, updateGameStatus] = useState('PLAY')
-    const [gunPosition, moveGun] = useState({ x: userData.INITIAL_GUN_POSITION_X, y: 0 })
+    const [gunPosition, moveGun] = useState({ x: userData.INITIAL_GUN_POSITION_X, y: 0, last: null })
 
 
     const [buttonsDown, changeButtonStatus] = useState({
@@ -80,15 +80,15 @@ export default function TheBirds() {
     // TODO gun boundaries
     const updateGunPosition = useCallback(() => {
         moveGun(prevGunPosition => {
-            const { left, right, up, down } = buttonsDown;
+            const { left, right, up, down, last } = buttonsDown;
 
             let newX = prevGunPosition.x
             let newY = prevGunPosition.y
 
-            if (left) newX = prevGunPosition.x - userData.GUN_SPEED;
-            if (right) newX = prevGunPosition.x + userData.GUN_SPEED;
-            if (up) newY = prevGunPosition.y + userData.GUN_SPEED;
-            if (down) newY = prevGunPosition.y - userData.GUN_SPEED;
+            if (left && (!last || last === 'LEFT')) newX = Math.max(0, prevGunPosition.x - userData.GUN_SPEED);
+            if (right && (!last || last === 'RIGHT')) newX = Math.min(1000, prevGunPosition.x + userData.GUN_SPEED);
+            if (up) newY = Math.min(800, prevGunPosition.y + userData.GUN_SPEED)
+            if (down) newY = Math.max(0, prevGunPosition.y - userData.GUN_SPEED)
 
             return {
                 x: newX,
@@ -122,34 +122,28 @@ export default function TheBirds() {
                 break;
             case 97: // left (a)
                 changeButtonStatus(prevStatus => ({
-                    up: prevStatus.up,
-                    down: prevStatus.down,
+                    ...prevStatus,
                     left: true,
-                    right: false
+                    last: 'LEFT'
                 }))
                 break
             case 100: // right (d)
                 changeButtonStatus(prevStatus => ({
-                    up: prevStatus.up,
-                    down: prevStatus.down,
-                    left: false,
-                    right: true
+                    ...prevStatus,
+                    right: true,
+                    last: 'RIGHT'
                 }))
                 break
             case 119: // up (w)
                 changeButtonStatus(prevStatus => ({
-                    up: true,
-                    down: false,
-                    left: prevStatus.left,
-                    right: prevStatus.right
+                    ...prevStatus,
+                    up: true
                 }))
                 break
             case 115: // down (s)
                 changeButtonStatus(prevStatus => ({
-                    up: false,
+                    ...prevStatus,
                     down: true,
-                    left: prevStatus.left,
-                    right: prevStatus.right
                 }))
                 break
         }
@@ -160,34 +154,28 @@ export default function TheBirds() {
         switch (event.code) {
             case 'KeyA': // left (a)
                 changeButtonStatus(prevStatus => ({
-                    up: prevStatus.up,
-                    down: prevStatus.down,
+                    ...prevStatus,
                     left: false,
-                    right: false
+                    last: prevStatus.last === 'LEFT' ? null : prevStatus.last
                 }))
                 break
             case 'KeyD': // right (d)
                 changeButtonStatus(prevStatus => ({
-                    up: prevStatus.up,
-                    down: prevStatus.down,
-                    left: false,
-                    right: false
+                    ...prevStatus,
+                    right: false,
+                    last: prevStatus.last === 'RIGHT' ? null : prevStatus.last
                 }))
                 break
             case 'KeyW': // up (w)
                 changeButtonStatus(prevStatus => ({
+                    ...prevStatus,
                     up: false,
-                    down: false,
-                    left: prevStatus.left,
-                    right: prevStatus.right
                 }))
                 break
             case 'KeyS': // down (s)
                 changeButtonStatus(prevStatus => ({
-                    up: false,
-                    down: false,
-                    left: prevStatus.left,
-                    right: prevStatus.right
+                    ...prevStatus,
+                    down: false
                 }))
                 break
         }
