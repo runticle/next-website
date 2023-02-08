@@ -10,8 +10,7 @@ const GAME_DATA = {
     },
 
     // GAME DATA
-    BULLET_SIZE: 10,
-    LEVEL_TIME: 30000, // ms
+    BULLET_SIZE: 5,
     GAME_PULSE: 10, // ms
     BIRD_HEIGHT: 40,
     BIRD_WIDTH: 40, // px. Only green bird. Tricky in future.

@@ -14,7 +14,7 @@ export default function TheBirds() {
 
     const [timeElapsed, progressTime] = useState(0)
     const [timerPaused, toggleTimer] = useState(true)
-    const [birdPaths, setBirdPaths] = useState(null) // EXPERIMENTAL
+    const [birdPaths, setBirdPaths] = useState(null)
     const [gameStep, progressGameStep] = useState(0)
     const [bulletPositions, progressBullets] = useState([])
     const [kills, addKill] = useState(0)
@@ -88,7 +88,6 @@ export default function TheBirds() {
         progressBirdShit(leftoverShit)
     }, [shitPositions])
 
-    // TODO gun collisions
     const checkForCollisions = useCallback(() => {
         for (const [birdIndex, bird] of birdPaths.entries()) {
 
@@ -243,7 +242,7 @@ export default function TheBirds() {
         }, GAME_DATA.GAME_PULSE);
 
         // if level time is elapsed, we stop
-        if (timeElapsed >= GAME_DATA.LEVEL_TIME || gameStep > 2000) {
+        if (birdPaths.length === 0) {
             updateGameStatus('STOP')
             clearInterval(interval)
         }
@@ -252,7 +251,7 @@ export default function TheBirds() {
         return () => {
             clearInterval(interval)
         }
-    }, [updateGameStep, timerPaused, gameStep, timeElapsed]);
+    }, [updateGameStep, timerPaused, gameStep, birdPaths]);
 
     const generateLevel = () => {
         console.time('Generating Level 0')
@@ -316,7 +315,6 @@ export default function TheBirds() {
                 }>
                     Reset
                 </button>
-                <p>Time: {(timeElapsed / 1000).toFixed(2)} </p>
                 <p>Kills: {kills} </p>
                 <p>Health: {playerHealth} </p>
             </InfoBar>
