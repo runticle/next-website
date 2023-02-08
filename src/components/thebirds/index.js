@@ -32,6 +32,7 @@ export default function TheBirds() {
         const newBulletPositions = []
 
         bulletPositions.forEach(bullet => {
+            if (bullet.y > 950) return
             const newPosition = {
                 x: bullet.x,
                 y: bullet.y + userData.BULLET_SPEED,
@@ -66,8 +67,8 @@ export default function TheBirds() {
             for (const [bulletIndex, bullet] of bulletPositions.entries()) {
                 if (
                     bullet.x + 10 > bird_x // bullet width
-                    && bullet.x < bird_x + 50 // bird width
-                    && bird_y > 1000 - bullet.y - 10 - 20
+                    && bullet.x < bird_x + GAME_DATA.BIRD_WIDTH // bird width
+                    && bird_y > 1000 - bullet.y - 10 - GAME_DATA.BIRD_HEIGHT
                     && bird_y < 1000 - bullet.y
                 ) {
                     killbird(birdIndex, bulletIndex)
@@ -76,6 +77,7 @@ export default function TheBirds() {
         }
     }, [bulletPositions, birdPaths, killbird, gameStep])
 
+    // TODO gun boundaries
     const updateGunPosition = useCallback(() => {
         moveGun(prevGunPosition => {
             const { left, right, up, down } = buttonsDown;

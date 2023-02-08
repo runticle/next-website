@@ -8,7 +8,9 @@ const GAME_DATA = {
 
     // GAME DATA
     LEVEL_TIME: 30000, // ms
-    GAME_PULSE: 10// ms
+    GAME_PULSE: 10, // ms
+    BIRD_HEIGHT: 40,
+    BIRD_WIDTH: 40, // px. Only green bird. Tricky in future.
 }
 
 export default GAME_DATA
