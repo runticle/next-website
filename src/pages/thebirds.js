@@ -1,6 +1,7 @@
 import Bird from "@/components/thebirds/Bird"
 import Bullet from "@/components/thebirds/Bullet"
 import Gun from "@/components/thebirds/Gun"
+import generateLevel0 from "@/components/thebirds/levelBuilder"
 import useEventListener from "@/utils/useEventListener"
 import { useState, useEffect, useCallback } from "react"
 import styled from "styled-components"
@@ -126,7 +127,7 @@ function nextBulletPositions(currentPositions) {
 export default function TheBirds() {
     const [timeElapsed, progressTime] = useState(0)
     const [timerPaused, toggleTimer] = useState(true)
-    const [birdPositions, progressBirds] = useState(LEVEL_DATA.LEVEL_0.INITIAL_POSITIONS)
+    const [birdPositions, progressBirds] = useState(null) // EXPERIMENTAL
     const [gunPosition, moveGun] = useState({ x: LEVEL_DATA.INITIAL_GUN_POSITION_X, y: 0 })
     const [bulletPositions, progressBullets] = useState([])
     const [kills, addKill] = useState(0)
@@ -309,6 +310,23 @@ export default function TheBirds() {
             clearInterval(interval)
         }
     }, [updateGameStep, timerPaused]);
+
+
+    // EXPERIMENTAL
+    if (birdPositions === null) {
+        const data = generateLevel0()
+        console.log('level', data)
+
+        progressBirds(data)
+    }
+
+
+    if (birdPositions === null) return (
+        <div> Loading </div>
+    )
+    // END
+
+
 
     return (
         <GameContainer>
