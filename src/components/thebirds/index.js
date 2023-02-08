@@ -80,6 +80,14 @@ export default function TheBirds() {
         addKill(prevKills => prevKills + 1)
     }, [bulletPositions, birdPaths])
 
+    const playerHit = useCallback((shitIndex) => {
+        // damage player
+        editHealth(prevHealth => prevHealth - 1)
+
+        const leftoverShit = shitPositions.filter((_, index) => index !== shitIndex)
+        progressBirdShit(leftoverShit)
+    }, [shitPositions])
+
     // TODO gun collisions
     const checkForCollisions = useCallback(() => {
         for (const [birdIndex, bird] of birdPaths.entries()) {
@@ -102,8 +110,6 @@ export default function TheBirds() {
 
 
         for (const [shitIndex, shit] of shitPositions.entries()) {
-
-            // this is undefined when the game ends. why?
             const shit_x = shit.x;
             const shit_y = shit.y;
 
@@ -113,16 +119,12 @@ export default function TheBirds() {
                 && shit_y > 1000 - gunPosition.y - 10 - 10
                 && shit_y < 1000 - gunPosition.y
             ) {
-                console.log('SHIT!')
-
-                // damage player
+                playerHit(shitIndex)
             }
 
         }
 
-
-
-    }, [bulletPositions, birdPaths, killbird, gameStep, shitPositions, gunPosition])
+    }, [bulletPositions, birdPaths, killbird, gameStep, shitPositions, gunPosition, playerHit])
 
     // TODO gun boundaries
     const updateGunPosition = useCallback(() => {
@@ -309,12 +311,14 @@ export default function TheBirds() {
                     addKill(0)
                     progressGameStep(0)
                     progressBirdShit([])
+                    editHealth(userData.INITIAL_HEALTH)
                 }
                 }>
                     Reset
                 </button>
                 <p>Time: {(timeElapsed / 1000).toFixed(2)} </p>
                 <p>Kills: {kills} </p>
+                <p>Health: {playerHealth} </p>
             </InfoBar>
         </GameContainer>
     )
