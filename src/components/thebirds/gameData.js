@@ -16,6 +16,7 @@ const GAME_DATA = {
     BIRD_WIDTH: 40, // px. Only green bird. Tricky in future.
     SHIT_SPEED: 4,
     SHIT_SIZE: 10,
+    // SHIT_ODDS: 0.005,
 
     INITIAL_GUN_POSITION: {
         x: 480,

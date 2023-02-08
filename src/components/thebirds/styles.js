@@ -14,7 +14,6 @@ const GameContainer = styled.div`
     background-image: url('/images/thebirds/thebirds.jpg');
     background-size: cover;
     background-position: center;
-    opacity: 0.7;
 
     position: absolute;
     left: 0;
@@ -48,8 +47,6 @@ const GameContainer = styled.div`
 const BirdCage = styled.div`
     position: relative;
     bottom: var(--infoBarHeight);
-
-    /* background-color: blue; */
     margin: 0 auto;
 
     height: 1000px;
@@ -68,8 +65,6 @@ const InfoBar = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-    /* background: #eab70e; */
 
     background: linear-gradient(-45deg, #fce8a4, #fad355, #eab70e, brown);
 	background-size: 400% 400%;

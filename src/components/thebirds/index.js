@@ -10,6 +10,7 @@ import GAME_DATA from "./gameData"
 import Shit from "./Shit"
 import GameEnd from "./GameEnd"
 import HealthBar from "./HealthBar"
+import Paused from "./Paused"
 
 export default function TheBirds() {
     const [userData, updateUserData] = useState(GAME_DATA.INITIAL_USER_DATA)
@@ -42,7 +43,7 @@ export default function TheBirds() {
         const newShitPositions = []
 
         shitPositions.forEach(bullet => {
-            if (bullet.y > 950) return
+            if (bullet.y > 1100 - gunPosition.y) return
             const newPosition = {
                 x: bullet.x,
                 y: bullet.y + GAME_DATA.SHIT_SPEED,
@@ -52,7 +53,7 @@ export default function TheBirds() {
         })
 
         progressBirdShit(newShitPositions)
-    }, [shitPositions, progressBirdShit])
+    }, [shitPositions, progressBirdShit, gunPosition])
 
     const updateBulletPositions = useCallback(() => {
         const newBulletPositions = []
@@ -305,6 +306,7 @@ export default function TheBirds() {
                         ))
                     }
                     <Gun position={gunPosition} />
+                    {/* <Paused isPaused={timerPaused} resume={() => toggleTimer(false)} /> */}
                 </BirdCage>
             }
             <InfoBar>
