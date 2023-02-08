@@ -20,6 +20,9 @@ export default function Bird({ positionMap = {}, gameStep, birdShit }) {
     if (!nextPosition) return null
     const { x, y } = nextPosition;
 
+    // TODO check if this actually saves on performance
+    if (y < 0) return null
+
     const { BIRD_WIDTH, BIRD_HEIGHT } = GAME_DATA
 
     const width = toPixel(BIRD_WIDTH)
@@ -33,7 +36,7 @@ export default function Bird({ positionMap = {}, gameStep, birdShit }) {
 
     const iShouldShit = getRandomNumberUpTo(1000) < 5;
 
-    if (iShouldShit && gameStep > 100) {
+    if (iShouldShit && y > 100) {
         birdShit({ x, y })
     }
 
