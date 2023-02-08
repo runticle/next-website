@@ -9,6 +9,7 @@ import { BirdCage, GameContainer, InfoBar } from "./styles"
 import GAME_DATA from "./gameData"
 import Shit from "./Shit"
 import GameEnd from "./GameEnd"
+import HealthBar from "./HealthBar"
 
 export default function TheBirds() {
     const [userData, updateUserData] = useState(GAME_DATA.INITIAL_USER_DATA)
@@ -20,7 +21,7 @@ export default function TheBirds() {
     const [bulletPositions, progressBullets] = useState([])
     const [kills, addKill] = useState(0)
     const [gameStatus, updateGameStatus] = useState('PLAY')
-    const [gunPosition, moveGun] = useState({ x: userData.INITIAL_GUN_POSITION_X, y: 0, last: null })
+    const [gunPosition, moveGun] = useState(GAME_DATA.INITIAL_GUN_POSITION)
 
     const [playerHealth, editHealth] = useState(userData.INITIAL_HEALTH)
 
@@ -244,7 +245,7 @@ export default function TheBirds() {
 
         // if level time is elapsed, we stop
         if (birdPaths.length === 0 || playerHealth < 1) {
-            updateGameStatus('STOP')
+            updateGameStatus('END')
             clearInterval(interval)
         }
 
@@ -280,11 +281,13 @@ export default function TheBirds() {
         progressGameStep(0)
         progressBirdShit([])
         editHealth(userData.INITIAL_HEALTH)
+        updateGameStatus('STOP')
+        moveGun(GAME_DATA.INITIAL_GUN_POSITION)
     }
 
     return (
         <GameContainer>
-            {gameStatus === 'STOP' ? <GameEnd playerHealth={playerHealth} kills={kills} /> :
+            {gameStatus === 'END' ? <GameEnd playerHealth={playerHealth} kills={kills} restartLevel={restartLevel} /> :
                 <BirdCage>
                     {
                         birdPaths.map((bird, index) => (
@@ -305,20 +308,24 @@ export default function TheBirds() {
                 </BirdCage>
             }
             <InfoBar>
-                <button onClick={() => {
-                    toggleTimer(false)
-                    updateGameStatus('GO')
-                }}>
-                    Start
-                </button>
-                <button onClick={() => toggleTimer(true)}>
-                    Pause
-                </button>
-                <button onClick={restartLevel}>
-                    Reset
-                </button>
-                <p>Kills: {kills} </p>
-                <p>Health: {playerHealth} </p>
+                <div>
+                    <button onClick={() => {
+                        toggleTimer(false)
+                        updateGameStatus('GO')
+                    }}>
+                        Start
+                    </button>
+                    <button onClick={() => toggleTimer(true)}>
+                        Pause
+                    </button>
+                    <button onClick={restartLevel}>
+                        Reset
+                    </button>
+                </div>
+                <p>
+                    Kills: {kills}
+                </p>
+                <HealthBar playerHealth={playerHealth} />
             </InfoBar>
         </GameContainer>
     )

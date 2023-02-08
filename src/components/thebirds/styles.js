@@ -64,6 +64,10 @@ const InfoBar = styled.div`
     height: var(--infoBarHeight);
     opacity: 0.9;
     border-top: 5px solid black;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
     /* background: #eab70e; */
 

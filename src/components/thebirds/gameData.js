@@ -15,7 +15,13 @@ const GAME_DATA = {
     BIRD_HEIGHT: 40,
     BIRD_WIDTH: 40, // px. Only green bird. Tricky in future.
     SHIT_SPEED: 4,
-    SHIT_SIZE: 10
+    SHIT_SIZE: 10,
+
+    INITIAL_GUN_POSITION: {
+        x: 480,
+        y: 0,
+        last: null
+    }
 }
 
 export default GAME_DATA
