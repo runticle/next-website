@@ -8,6 +8,7 @@ import { BirdCage, GameContainer, InfoBar } from "./styles"
 
 import GAME_DATA from "./gameData"
 import Shit from "./Shit"
+import GameEnd from "./GameEnd"
 
 export default function TheBirds() {
     const [userData, updateUserData] = useState(GAME_DATA.INITIAL_USER_DATA)
@@ -242,7 +243,7 @@ export default function TheBirds() {
         }, GAME_DATA.GAME_PULSE);
 
         // if level time is elapsed, we stop
-        if (birdPaths.length === 0) {
+        if (birdPaths.length === 0 || playerHealth < 1) {
             updateGameStatus('STOP')
             clearInterval(interval)
         }
@@ -251,7 +252,7 @@ export default function TheBirds() {
         return () => {
             clearInterval(interval)
         }
-    }, [updateGameStep, timerPaused, gameStep, birdPaths]);
+    }, [updateGameStep, timerPaused, gameStep, birdPaths, playerHealth]);
 
     const generateLevel = () => {
         console.time('Generating Level 0')
@@ -270,9 +271,20 @@ export default function TheBirds() {
         )
     }
 
+    const restartLevel = () => {
+        toggleTimer(true)
+        progressTime(0) // reset
+        generateLevel()// initial
+        progressBullets([])
+        addKill(0)
+        progressGameStep(0)
+        progressBirdShit([])
+        editHealth(userData.INITIAL_HEALTH)
+    }
+
     return (
         <GameContainer>
-            {gameStatus === 'STOP' ? null :
+            {gameStatus === 'STOP' ? <GameEnd playerHealth={playerHealth} kills={kills} /> :
                 <BirdCage>
                     {
                         birdPaths.map((bird, index) => (
@@ -302,17 +314,7 @@ export default function TheBirds() {
                 <button onClick={() => toggleTimer(true)}>
                     Pause
                 </button>
-                <button onClick={() => {
-                    toggleTimer(true)
-                    progressTime(0) // reset
-                    generateLevel()// initial
-                    progressBullets([])
-                    addKill(0)
-                    progressGameStep(0)
-                    progressBirdShit([])
-                    editHealth(userData.INITIAL_HEALTH)
-                }
-                }>
+                <button onClick={restartLevel}>
                     Reset
                 </button>
                 <p>Kills: {kills} </p>
