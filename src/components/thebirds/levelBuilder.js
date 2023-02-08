@@ -4,16 +4,16 @@ const level0 = [
         timeStart: 0,
         maxDepth: 500
     },
-    {
-        birdCount: 6,
-        timeStart: 50, // ms
-        maxDepth: 350
+    // {
+    //     birdCount: 6,
+    //     timeStart: 50, // ms
+    //     maxDepth: 350
 
-    }, {
-        birdCount: 9,
-        timeStart: 150, // 15000ms
-        maxDepth: 300
-    }
+    // }, {
+    //     birdCount: 9,
+    //     timeStart: 150, // 15000ms
+    //     maxDepth: 300
+    // }
 ];
 
 const getStartPositionsForWaveN = (count, timeStart, depth) => {
@@ -75,7 +75,7 @@ const generateLevel0 = () => {
                 y: depth
             }
 
-            depth += 5 // speed * 10ms step
+            depth += 1 // speed * 10ms step
             i += 1
         }
 

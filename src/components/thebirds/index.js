@@ -4,130 +4,44 @@ import Gun from "@/components/thebirds/Gun"
 import generateLevel0 from "@/components/thebirds/levelBuilder"
 import useEventListener from "@/utils/useEventListener"
 import { useState, useEffect, useCallback } from "react"
-import styled from "styled-components"
+import { BirdCage, GameContainer, InfoBar } from "./styles"
 
-const GameContainer = styled.div`
-    border: 5px solid black;
-    background-image: url('/images/thebirds/thebirds.jpg');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.7;
-
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-
-    overflow: hidden;
-
-    // vars
-    --infoBarHeight: 150px;
-`
-
-const BirdCage = styled.div`
-    position: relative;
-    bottom: var(--infoBarHeight);
-
-    /* background-color: blue; */
-    margin: 0 auto;
-
-    height: 1000px;
-    width: 1000px;
-`
-
-const InfoBar = styled.div`
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: var(--infoBarHeight);
-    background: red;
-`
-
-const LEVEL_DATA = {
-    INITIAL_GUN_POSITION_X: 245,
-    BIRD_SPEED: 1, // px / tick
-    BULLET_SPEED: 10, // px / tick
-    GUN_SPEED: 3,
-    LEVEL_0: {
-        INITIAL_POSITIONS: [
-            {
-                x: 0,
-                y: -50,
-            },
-            {
-                x: 390,
-                y: 0,
-            },
-            {
-                x: 900,
-                y: -50,
-            },
-            {
-                x: 0,
-                y: -10,
-            },
-            {
-                x: 300,
-                y: 0,
-            },
-            {
-                x: 900,
-                y: -170,
-            },
-            {
-                x: 0,
-                y: -100,
-            },
-            {
-                x: 390,
-                y: 50,
-            },
-            {
-                x: 900,
-                y: -150,
-            },
-        ]
-    }
-}
-
-function nextBulletPositions(currentPositions) {
-    const newPositions = []
-
-    currentPositions.forEach(bullet => {
-        const newPosition = {
-            x: bullet.x,
-            y: bullet.y + LEVEL_DATA.BULLET_SPEED,
-        }
-
-        newPositions.push(newPosition)
-    })
-
-    return newPositions;
-}
-
-
+import GAME_DATA from "./gameData"
 
 export default function TheBirds() {
+    const [userData, updateUserData] = useState(GAME_DATA.INITIAL_USER_DATA)
+
     const [timeElapsed, progressTime] = useState(0)
     const [timerPaused, toggleTimer] = useState(true)
     const [birdPaths, setBirdPaths] = useState(null) // EXPERIMENTAL
     const [gameStep, progressGameStep] = useState(0)
-    const [gunPosition, moveGun] = useState({ x: LEVEL_DATA.INITIAL_GUN_POSITION_X, y: 0 })
     const [bulletPositions, progressBullets] = useState([])
     const [kills, addKill] = useState(0)
     const [gameStatus, updateGameStatus] = useState('PLAY')
+    const [gunPosition, moveGun] = useState({ x: userData.INITIAL_GUN_POSITION_X, y: 0 })
+
+
     const [buttonsDown, changeButtonStatus] = useState({
         up: false,
         down: false,
         right: false,
         left: false,
     })
-    const LEVEL_TIME = 30000 // ms
-    const GAME_PULSE = 10; // ms
 
+    const updateBulletPositions = useCallback(() => {
+        const newBulletPositions = []
 
+        bulletPositions.forEach(bullet => {
+            const newPosition = {
+                x: bullet.x,
+                y: bullet.y + userData.BULLET_SPEED,
+            }
+
+            newBulletPositions.push(newPosition)
+        })
+
+        progressBullets(newBulletPositions)
+    }, [progressBullets, userData, bulletPositions])
 
     const killbird = useCallback((birdIndex, bulletIndex) => {
         const leftoverBullets = bulletPositions.filter((_, index) => index !== bulletIndex)
@@ -135,31 +49,14 @@ export default function TheBirds() {
 
         // this might be very inefficent 
         // could just set the bird to null?
-        console.time('Bird is killed')
         const leftoverBirds = birdPaths.filter((_, index) => index !== birdIndex)
         setBirdPaths(leftoverBirds)
-        console.timeEnd('Bird is killed')
-
-
-
 
         addKill(prevKills => prevKills + 1)
     }, [bulletPositions, birdPaths])
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const updateGameStep = useCallback(() => {
-        // progress game step
-        if (timeElapsed > gameStep * 10) progressGameStep(prevGameStep => prevGameStep + 1)
-
-        progressTime(prevTimeElapsed => prevTimeElapsed + GAME_PULSE) //ms
-
-
-        // check for bullets.
-        const newBulletPositions = nextBulletPositions(bulletPositions)
-        progressBullets(newBulletPositions)
-
-        // check for any collisions
-        // I will check whether any birds are in the vicinity of a bullet
+    // TODO gun collisions
+    const checkForCollisions = useCallback(() => {
         for (const [birdIndex, bird] of birdPaths.entries()) {
 
             // this is undefined when the game ends. why?
@@ -176,28 +73,42 @@ export default function TheBirds() {
                 }
             }
         }
+    }, [bulletPositions, birdPaths, killbird, gameStep])
 
-        // move the gun if necessary
+    const updateGunPosition = useCallback(() => {
         moveGun(prevGunPosition => {
             const { left, right, up, down } = buttonsDown;
 
             let newX = prevGunPosition.x
             let newY = prevGunPosition.y
 
-            if (left) newX = prevGunPosition.x - LEVEL_DATA.GUN_SPEED;
-            if (right) newX = prevGunPosition.x + LEVEL_DATA.GUN_SPEED;
-            if (up) newY = prevGunPosition.y + LEVEL_DATA.GUN_SPEED;
-            if (down) newY = prevGunPosition.y - LEVEL_DATA.GUN_SPEED;
+            if (left) newX = prevGunPosition.x - userData.GUN_SPEED;
+            if (right) newX = prevGunPosition.x + userData.GUN_SPEED;
+            if (up) newY = prevGunPosition.y + userData.GUN_SPEED;
+            if (down) newY = prevGunPosition.y - userData.GUN_SPEED;
 
             return {
                 x: newX,
                 y: newY
             }
         })
+    }, [buttonsDown, userData])
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const updateGameStep = useCallback(() => {
+        // progress game step
+        if (timeElapsed > gameStep * 10) progressGameStep(prevGameStep => prevGameStep + 1)
+        progressTime(prevTimeElapsed => prevTimeElapsed + GAME_DATA.GAME_PULSE) //ms
 
+        // move bullets
+        updateBulletPositions(bulletPositions)
 
-    }, [timeElapsed, bulletPositions, buttonsDown, progressGameStep, birdPaths, killbird, gameStep])
+        // check for any collisions
+        checkForCollisions()
+
+        // move the gun if necessary
+        updateGunPosition()
+    }, [timeElapsed, bulletPositions, progressGameStep, gameStep, checkForCollisions, updateBulletPositions, updateGunPosition])
 
     const handleKeypress = useCallback((event) => {
         console.log(event.charCode)
@@ -285,14 +196,13 @@ export default function TheBirds() {
     useEventListener('keyup', handleKeyUp)
 
     useEffect(() => {
-
         const interval = setInterval(() => {
             if (timerPaused) return () => clearInterval(interval);
             updateGameStep()
-        }, GAME_PULSE);
+        }, GAME_DATA.GAME_PULSE);
 
         // if level time is elapsed, we stop
-        if (timeElapsed >= LEVEL_TIME || gameStep > 500) {
+        if (timeElapsed >= GAME_DATA.LEVEL_TIME || gameStep > 500) {
             updateGameStatus('STOP')
             clearInterval(interval)
         }
@@ -303,24 +213,20 @@ export default function TheBirds() {
         }
     }, [updateGameStep, timerPaused, gameStep, timeElapsed]);
 
-    // EXPERIMENTAL
     const generateLevel = () => {
-        // level ? 
         const data = generateLevel0()
 
+        // set predetermined bird paths
         setBirdPaths(data)
     }
 
-
     if (birdPaths === null) {
         generateLevel()
+
+        return (
+            <div> Loading </div>
+        )
     }
-
-
-    if (birdPaths === null) return (
-        <div> Loading </div>
-    )
-    // END
 
     return (
         <GameContainer>
