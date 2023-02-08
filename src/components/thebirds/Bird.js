@@ -1,4 +1,6 @@
+import toPixel from "@/utils/toPixel"
 import styled from "styled-components"
+import GAME_DATA from "./gameData"
 
 
 const BirdSprite = styled.div`
@@ -7,9 +9,6 @@ const BirdSprite = styled.div`
     background-image: url('/images/thebirds/greenBird.png');
     background-size: cover;
     background-position: center;
-    
-    width: 40px;
-    height: 40px;
 
     z-index: 10;
 `
@@ -21,11 +20,16 @@ export default function Bird({ positionMap = {}, gameStep, birdShit }) {
     if (!nextPosition) return null
     const { x, y } = nextPosition;
 
+    const { BIRD_WIDTH, BIRD_HEIGHT } = GAME_DATA
+
+    const width = toPixel(BIRD_WIDTH)
+    const height = toPixel(BIRD_HEIGHT)
+
     // bird has to randomnly poop.
     // function from the game file to do so, need to send back position and track that
 
-    const left = x + 'px';
-    const top = y + 'px';
+    const left = toPixel(x)
+    const top = toPixel(y)
 
     const iShouldShit = getRandomNumberUpTo(1000) < 5;
 
@@ -33,5 +37,5 @@ export default function Bird({ positionMap = {}, gameStep, birdShit }) {
         birdShit({ x, y })
     }
 
-    return <BirdSprite style={{ left, top }} />
+    return <BirdSprite style={{ left, top, width, height }} />
 }

@@ -1,4 +1,6 @@
+import toPixel from "@/utils/toPixel";
 import styled from "styled-components"
+import GAME_DATA from "./gameData";
 
 
 const ShitSprite = styled.div`
@@ -7,9 +9,6 @@ const ShitSprite = styled.div`
     /* background-image: url('/images/thebirds/greenBird.png'); */
     /* background-size: cover;
     background-position: center; */
-    
-    width: 10px;
-    height: 10px;
 
     z-index: 10;
 `
@@ -17,11 +16,14 @@ const ShitSprite = styled.div`
 export default function Shit({ position }) {
     const { x, y } = position;
 
-    // console.log('Bullet', position)
+    const { SHIT_SIZE } = GAME_DATA
 
-    const left = x + 'px';
-    const top = y + 'px';
+    const width = toPixel(SHIT_SIZE)
+    const height = toPixel(SHIT_SIZE)
 
-    return <ShitSprite style={{ left, top }} >💩</ShitSprite>
+    const left = toPixel(x)
+    const top = toPixel(y)
+
+    return <ShitSprite style={{ left, top, width, height }} >💩</ShitSprite>
 
 }

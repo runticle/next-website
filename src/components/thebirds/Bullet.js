@@ -1,11 +1,10 @@
+import toPixel from "@/utils/toPixel";
 import styled from "styled-components"
+import GAME_DATA from "./gameData";
 
 
 const BulletSprite = styled.div`
     position: absolute;
-    
-    width: 10px;
-    height: 10px;
 
     border-radius: 50%;
 
@@ -16,10 +15,13 @@ const BulletSprite = styled.div`
 export default function Bullet({ position }) {
     const { x, y } = position;
 
-    // console.log('Bullet', position)
+    const { BULLET_SIZE } = GAME_DATA;
 
-    const left = x + 'px';
-    const bottom = y + 'px';
+    const width = toPixel(BULLET_SIZE);
+    const height = toPixel(BULLET_SIZE);
 
-    return <BulletSprite style={{ left, bottom }} />
+    const left = toPixel(x)
+    const bottom = toPixel(y)
+
+    return <BulletSprite style={{ left, bottom, width, height }} />
 }
