@@ -48,7 +48,7 @@ const LEVEL_DATA = {
     INITIAL_GUN_POSITION_X: 400,
     BIRD_SPEED: 1, // px / tick
     BULLET_SPEED: 2, // px / tick
-    GUN_SPEED: 2,
+    GUN_SPEED: 4,
     LEVEL_0: {
         INITIAL_POSITIONS: [
             {
@@ -59,10 +59,34 @@ const LEVEL_DATA = {
                 x: 390,
                 y: 0,
             },
-            // {
-            //     x: 900,
-            //     y: -50,
-            // }
+            {
+                x: 900,
+                y: -50,
+            },
+            {
+                x: 0,
+                y: -10,
+            },
+            {
+                x: 300,
+                y: 0,
+            },
+            {
+                x: 900,
+                y: -170,
+            },
+            {
+                x: 0,
+                y: -100,
+            },
+            {
+                x: 390,
+                y: 50,
+            },
+            {
+                x: 900,
+                y: -150,
+            },
         ]
     }
 }
@@ -106,8 +130,16 @@ export default function TheBirds() {
     const [gunPosition, moveGun] = useState({ x: LEVEL_DATA.INITIAL_GUN_POSITION_X, y: 0 })
     const [bulletPositions, progressBullets] = useState([])
     const [kills, addKill] = useState(0)
+    const [buttonsDown, changeButtonStatus] = useState({
+        up: false,
+        down: false,
+        right: false,
+        left: false,
+    })
     const LEVEL_TIME = 30000 // ms
     const GAME_PULSE = 10; // ms
+
+
 
     const killbird = useCallback((birdIndex, bulletIndex) => {
         const leftoverBullets = bulletPositions.filter((_, index) => index !== bulletIndex)
@@ -157,12 +189,31 @@ export default function TheBirds() {
                 }
             }
         }
-    }, [timeElapsed, birdPositions, killbird, bulletPositions])
+
+        // move the gun if necessary
+        moveGun(prevGunPosition => {
+            const { left, right, up, down } = buttonsDown;
+
+            let newX = prevGunPosition.x
+            let newY = prevGunPosition.y
+
+            if (left) newX = prevGunPosition.x - LEVEL_DATA.GUN_SPEED;
+            if (right) newX = prevGunPosition.x + LEVEL_DATA.GUN_SPEED;
+            if (up) newY = prevGunPosition.y + LEVEL_DATA.GUN_SPEED;
+            if (down) newY = prevGunPosition.y - LEVEL_DATA.GUN_SPEED;
+
+            return {
+                x: newX,
+                y: newY
+            }
+        })
+
+
+
+    }, [timeElapsed, birdPositions, killbird, bulletPositions, buttonsDown])
 
     const handleKeypress = useCallback((event) => {
-        console.log('Key pressed:', event.charCode)
-        console.log(gunPosition)
-
+        console.log(event.charCode)
         switch (event.charCode) {
             // spacebar is a bulleta
             case 32:
@@ -170,16 +221,82 @@ export default function TheBirds() {
                 progressBullets(prevBulletPositions => ([...prevBulletPositions, { x: gunPosition.x, y: gunPosition.y }]))
                 break;
             case 97: // left (a)
-                // console.log(event)
-                moveGun(prevGunPosition => ({ x: prevGunPosition.x - LEVEL_DATA.GUN_SPEED, y: 0 }))
+                changeButtonStatus(prevStatus => ({
+                    up: prevStatus.up,
+                    down: prevStatus.down,
+                    left: true,
+                    right: false
+                }))
                 break
             case 100: // right (d)
-                moveGun(prevGunPosition => ({ x: prevGunPosition.x + LEVEL_DATA.GUN_SPEED, y: 0 }))
+                changeButtonStatus(prevStatus => ({
+                    up: prevStatus.up,
+                    down: prevStatus.down,
+                    left: false,
+                    right: true
+                }))
+                break
+            case 119: // up (w)
+                changeButtonStatus(prevStatus => ({
+                    up: true,
+                    down: false,
+                    left: prevStatus.left,
+                    right: prevStatus.right
+                }))
+                break
+            case 115: // down (s)
+                changeButtonStatus(prevStatus => ({
+                    up: false,
+                    down: true,
+                    left: prevStatus.left,
+                    right: prevStatus.right
+                }))
                 break
         }
-    }, [progressBullets, gunPosition, moveGun])
+    }, [progressBullets, gunPosition, changeButtonStatus])
+
+    const handleKeyUp = useCallback((event) => {
+        console.log('up', event.code)
+        // TODO store codes in variables 
+        switch (event.code) {
+            case 'KeyA': // left (a)
+                changeButtonStatus(prevStatus => ({
+                    up: prevStatus.up,
+                    down: prevStatus.down,
+                    left: false,
+                    right: false
+                }))
+                break
+            case 'KeyD': // right (d)
+                console.log('stop')
+                changeButtonStatus(prevStatus => ({
+                    up: prevStatus.up,
+                    down: prevStatus.down,
+                    left: false,
+                    right: false
+                }))
+                break
+            case 'KeyW': // up (w)
+                changeButtonStatus(prevStatus => ({
+                    up: false,
+                    down: false,
+                    left: prevStatus.left,
+                    right: prevStatus.right
+                }))
+                break
+            case 'KeyS': // down (s)
+                changeButtonStatus(prevStatus => ({
+                    up: false,
+                    down: false,
+                    left: prevStatus.left,
+                    right: prevStatus.right
+                }))
+                break
+        }
+    }, [changeButtonStatus])
 
     useEventListener('keypress', handleKeypress)
+    useEventListener('keyup', handleKeyUp)
 
     useEffect(() => {
         const interval = setInterval(() => {

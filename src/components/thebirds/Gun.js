@@ -16,6 +16,7 @@ export default function Gun({ position }) {
     const { x, y } = position
 
     const left = x + 'px';
+    const bottom = y + 'px';
 
-    return <GunSprite style={{ left }} />
+    return <GunSprite style={{ left, bottom }} />
 }
