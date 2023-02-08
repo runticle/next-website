@@ -13,7 +13,7 @@ const BirdSprite = styled.div`
 
 export default function Bird({ positionMap = {}, gameStep }) {
     const nextPosition = positionMap[gameStep]
-    if (!nextPosition) return <div> ded </div>
+    if (!nextPosition) return null
     const { x, y } = nextPosition;
 
 
