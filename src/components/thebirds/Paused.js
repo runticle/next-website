@@ -11,7 +11,6 @@ const PausedBox = styled.div`
     text-align: center;
 
     border-radius: 10px;
-    box-sizing: border-box;
 
     opacity: 0.9;
     border: 5px solid black;
@@ -21,12 +20,15 @@ const PausedBox = styled.div`
 
     z-index: 500;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding:30px;
+
 `
 
 
-export default function Paused({ isPaused, resume }) {
-    if (!isPaused) return null
-
+export default function Paused({ newGame, resume }) {
     return <PausedBox>
         <h2>
             Paused
@@ -34,8 +36,8 @@ export default function Paused({ isPaused, resume }) {
         <button onClick={resume}>
             Resume
         </button>
-        {/* <p>
-            Press space to resume
-        </p> */}
+        <button onClick={newGame}>
+            New Game
+        </button>
     </PausedBox>
 }

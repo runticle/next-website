@@ -1,4 +1,5 @@
 import toPixel from "@/utils/toPixel"
+import { useState, useCallback } from "react"
 import styled from "styled-components"
 import GAME_DATA from "./gameData"
 
@@ -10,18 +11,42 @@ const BirdSprite = styled.div`
     background-size: cover;
     background-position: center;
 
+    transform: ${props => props.flip ? 'scaleX(-1)' : 'null'};
+
     z-index: 10;
+
+
+    &:after {
+        content: 'Happy birthday!';
+        width: 120px;
+        margin-left: -150px;
+        height: 50px;
+        background: beige;
+        padding: 5px;
+        border-radius: 3px;
+
+        display: ${props => !props.carryBanner || props.flip ? 'none' : 'unset'};
+    }
 `
 
 const getRandomNumberUpTo = (n) => Math.floor(Math.random() * n)
 
-export default function Bird({ positionMap = {}, gameStep, birdShit }) {
+export default function Bird({ positionMap = {}, gameStep, birdShit, index }) {
+    const [flip, flipDirection] = useState(false)
+
     const nextPosition = positionMap[gameStep]
-    if (!nextPosition) return null
     const { x, y } = nextPosition;
+
+    const flipper = useCallback((direc) => {
+        if (positionMap[gameStep + 1]['x'] < positionMap[gameStep]['x'] && flip === false) flipDirection(true)
+        if (positionMap[gameStep + 1]['x'] > positionMap[gameStep]['x'] && flip === true) flipDirection(false)
+    }, [gameStep, positionMap, flip])
+
+    flipper()
 
     // TODO check if this actually saves on performance
     if (y < 0) return null
+
 
     const { BIRD_WIDTH, BIRD_HEIGHT } = GAME_DATA
 
@@ -40,5 +65,7 @@ export default function Bird({ positionMap = {}, gameStep, birdShit }) {
         birdShit({ x, y })
     }
 
-    return <BirdSprite style={{ left, top, width, height }} />
+    const carryBanner = index === 0
+
+    return <BirdSprite carryBanner={carryBanner} style={{ left, top, width, height }} flip={flip} />
 }
