@@ -22,21 +22,47 @@ const level0 = {
             maxDepth: 400
         },
     ],
-    2: [{
-        birdCount: 10,
-        gameStepStart: 0,
-        maxDepth: 240
-    }],
-    3: [{
-        birdCount: 13,
-        gameStepStart: 0,
-        maxDepth: 260
-    }],
-    4: [{
-        birdCount: 20,
-        gameStepStart: 0,
-        maxDepth: 190
-    }]
+    2: [
+        {
+            birdCount: 8,
+            gameStepStart: 0,
+            maxDepth: 200
+        },
+        {
+            birdCount: 12,
+            gameStepStart: 100,
+            maxDepth: 300
+        },
+    ],
+    3: [
+        {
+            birdCount: 10,
+            gameStepStart: 0,
+            maxDepth: 300
+        },
+        {
+            birdCount: 14,
+            gameStepStart: 75,
+            maxDepth: 200
+        },
+    ],
+    4: [
+        {
+            birdCount: 10,
+            gameStepStart: 0,
+            maxDepth: 300
+        },
+        {
+            birdCount: 15,
+            gameStepStart: 75,
+            maxDepth: 250
+        },
+        {
+            birdCount: 20,
+            gameStepStart: 150,
+            maxDepth: 400
+        },
+    ]
 }
 
 const getStartPositionsForWaveN = (count, gameStepStart, depth) => {
