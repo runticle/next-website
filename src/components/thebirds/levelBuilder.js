@@ -1,35 +1,36 @@
-const level0 = [
-    {
-        birdCount: 1,
-        gameStepStart: 0,
-        maxDepth: 500
-    },
-    {
-        birdCount: 4,
-        gameStepStart: 50,
-        maxDepth: 350
-    },
-    {
+const level0 = {
+    0: [
+        {
+            birdCount: 1,
+            gameStepStart: 0,
+            maxDepth: 500
+        },
+        {
+            birdCount: 4,
+            gameStepStart: 50,
+            maxDepth: 350
+        },],
+    1: [{
         birdCount: 6,
-        gameStepStart: 100,
+        gameStepStart: 0,
         maxDepth: 200
-    },
-    {
+    }],
+    2: [{
         birdCount: 10,
-        gameStepStart: 400,
+        gameStepStart: 0,
         maxDepth: 240
-    },
-    {
+    }],
+    3: [{
         birdCount: 13,
-        gameStepStart: 700,
+        gameStepStart: 0,
         maxDepth: 260
-    },
-    {
+    }],
+    4: [{
         birdCount: 20,
-        gameStepStart: 1000,
+        gameStepStart: 0,
         maxDepth: 190
-    }
-];
+    }]
+}
 
 const getStartPositionsForWaveN = (count, gameStepStart, depth) => {
     const WIDTH = 1000
@@ -45,12 +46,12 @@ const getStartPositionsForWaveN = (count, gameStepStart, depth) => {
     return startX
 }
 
-const generateLevel0 = () => {
+const generateWave = (wave) => {
 
     const birdPositions = []
 
-    for (const wave of level0) {
-        const start = getStartPositionsForWaveN(wave.birdCount, wave.gameStepStart, wave.maxDepth)
+    for (const batch of wave) {
+        const start = getStartPositionsForWaveN(batch.birdCount, batch.gameStepStart, batch.maxDepth)
         birdPositions.push(start)
     }
 
@@ -130,6 +131,18 @@ const generateLevel0 = () => {
     }
 
     return flightPaths;
+}
+
+const generateLevel0 = () => {
+    let waves = {
+
+    }
+
+    for (const key in level0) {
+        waves[key] = generateWave(level0[key])
+    }
+
+    return waves
 }
 
 export default generateLevel0

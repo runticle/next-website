@@ -15,8 +15,9 @@ import Paused from "./Paused"
 export default function TheBirds() {
     const [userData, updateUserData] = useState(GAME_DATA.INITIAL_USER_DATA)
 
-    const [timeElapsed, progressTime] = useState(0)
     const [timerPaused, toggleTimer] = useState(true)
+    const [waveIndex, setWaveIndex] = useState(0)
+    const [wave, setNewWave] = useState([])
     const [birdPaths, setBirdPaths] = useState(null)
     const [gameStep, progressGameStep] = useState(0)
     const [bulletPositions, progressBullets] = useState([])
@@ -77,11 +78,11 @@ export default function TheBirds() {
 
         // this might be very inefficent 
         // could just set the bird to null?
-        const leftoverBirds = birdPaths.filter((_, index) => index !== birdIndex)
-        setBirdPaths(leftoverBirds)
+        const leftoverBirds = wave.filter((_, index) => index !== birdIndex)
+        setNewWave(leftoverBirds)
 
         addKill(prevKills => prevKills + 1)
-    }, [bulletPositions, birdPaths])
+    }, [bulletPositions, wave])
 
     const playerHit = useCallback((shitIndex) => {
         // damage player
@@ -92,7 +93,7 @@ export default function TheBirds() {
     }, [shitPositions])
 
     const checkForCollisions = useCallback(() => {
-        for (const [birdIndex, bird] of birdPaths.entries()) {
+        for (const [birdIndex, bird] of wave.entries()) {
 
             // this is undefined when the game ends. why?
             const bird_x = bird[gameStep].x;
@@ -126,9 +127,8 @@ export default function TheBirds() {
 
         }
 
-    }, [bulletPositions, birdPaths, killbird, gameStep, shitPositions, gunPosition, playerHit, userData])
+    }, [bulletPositions, wave, killbird, gameStep, shitPositions, gunPosition, playerHit, userData])
 
-    // TODO gun boundaries
     const updateGunPosition = useCallback(() => {
         moveGun(prevGunPosition => {
             const { left, right, up, down, last } = buttonsDown;
@@ -151,8 +151,7 @@ export default function TheBirds() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const updateGameStep = useCallback(() => {
         // progress game step
-        if (timeElapsed > gameStep * 10) progressGameStep(prevGameStep => prevGameStep + 1)
-        progressTime(prevTimeElapsed => prevTimeElapsed + GAME_DATA.GAME_PULSE) //ms
+        progressGameStep(prevGameStep => prevGameStep + 1)
 
         // move bullets
         updateBulletPositions(bulletPositions)
@@ -165,7 +164,7 @@ export default function TheBirds() {
 
         // move the gun if necessary
         updateGunPosition()
-    }, [timeElapsed, bulletPositions, progressGameStep, gameStep, checkForCollisions, updateBulletPositions, updateGunPosition, shitPositions, updateBirdShit])
+    }, [bulletPositions, progressGameStep, checkForCollisions, updateBulletPositions, updateGunPosition, shitPositions, updateBirdShit])
 
     const handleKeypress = useCallback((event) => {
         switch (event.charCode) {
@@ -244,17 +243,31 @@ export default function TheBirds() {
             updateGameStep()
         }, GAME_DATA.GAME_PULSE);
 
-        // if level time is elapsed, we stop
-        if (birdPaths.length === 0 || playerHealth < 1) {
+        if (playerHealth < 0) {
             updateGameStatus('END')
             clearInterval(interval)
+        }
+
+        // if wave is finished, need a new wave until no waves
+        if (wave.length === 0) {
+            const newWave = birdPaths[waveIndex]
+
+            if (newWave) {
+                setNewWave(birdPaths[waveIndex])
+
+                progressGameStep(0)
+                setWaveIndex(prevWaveIndex => prevWaveIndex + 1)
+            } else {
+                updateGameStatus('END')
+                clearInterval(interval)
+            }
         }
 
         // cleanup interval to stop a billion of them running concurrently
         return () => {
             clearInterval(interval)
         }
-    }, [updateGameStep, timerPaused, gameStep, birdPaths, playerHealth]);
+    }, [updateGameStep, timerPaused, gameStep, wave, birdPaths, waveIndex, playerHealth]);
 
     const generateLevel = () => {
         console.time('Generating Level 0')
@@ -275,7 +288,6 @@ export default function TheBirds() {
 
     const restartLevel = () => {
         toggleTimer(true)
-        progressTime(0) // reset
         generateLevel()// initial
         progressBullets([])
         addKill(0)
@@ -284,6 +296,7 @@ export default function TheBirds() {
         editHealth(userData.INITIAL_HEALTH)
         updateGameStatus('STOP')
         moveGun(GAME_DATA.INITIAL_GUN_POSITION)
+        setWaveIndex(0)
     }
 
     return (
@@ -291,7 +304,7 @@ export default function TheBirds() {
             {gameStatus === 'END' ? <GameEnd playerHealth={playerHealth} kills={kills} restartLevel={restartLevel} /> :
                 <BirdCage>
                     {
-                        birdPaths.map((bird, index) => (
+                        wave.map((bird, index) => (
                             <Bird birdShit={birdShit} key={index} positionMap={bird} gameStep={gameStep} />
                         ))
                     }
