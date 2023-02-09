@@ -209,7 +209,7 @@ export default function TheBirds() {
                 }))
                 break
         }
-    }, [gunPosition, changeButtonStatus, userData, fireBullet])
+    }, [gunPosition, changeButtonStatus, userData, pullTrigger])
 
     const handleKeyUp = useCallback((event) => {
         // TODO store codes in variables 
