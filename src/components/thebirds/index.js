@@ -314,7 +314,7 @@ export default function TheBirds() {
                 <BirdCage>
                     {
                         wave.map((bird, index) => (
-                            <Bird birdShit={birdShit} key={index} positionMap={bird} gameStep={gameStep} />
+                            <Bird birdShit={birdShit} key={index} positionMap={bird} gameStep={gameStep} index={index} />
                         ))
                     }
                     {
