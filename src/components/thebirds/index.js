@@ -13,6 +13,15 @@ import Shit from "./Shit"
 import GameEnd from "./GameEnd"
 import HealthBar from "./HealthBar"
 import Paused from "./Paused"
+import NewGame from "./NewGame"
+
+const GAME_STATUS = {
+    NEW_GAME: 'NEW_GAME',
+    LIVE: 'LIVE',
+    PAUSED: 'PAUSED',
+    LEVEL_COMPLETE: 'LEVEL_COMPLETE',
+    // END ?
+}
 
 export default function TheBirds() {
     const [userData, updateUserData] = useState(GAME_DATA.INITIAL_USER_DATA)
@@ -24,7 +33,7 @@ export default function TheBirds() {
     const [gameStep, progressGameStep] = useState(0)
     const [bulletPositions, progressBullets] = useState([])
     const [kills, addKill] = useState(0)
-    const [gameStatus, updateGameStatus] = useState('PLAY')
+    const [gameStatus, updateGameStatus] = useState(GAME_STATUS.NEW_GAME)
     const [gunPosition, moveGun] = useState(GAME_DATA.INITIAL_GUN_POSITION)
 
     const [playerHealth, editHealth] = useState(userData.INITIAL_HEALTH)
@@ -246,14 +255,53 @@ export default function TheBirds() {
     useEventListener('keypress', handleKeypress)
     useEventListener('keyup', handleKeyUp)
 
+
+    const generateLevel = () => {
+        console.time('Generating Level 0')
+        const data = generateLevel0()
+        console.timeEnd('Generating Level 0')
+
+        // set predetermined bird paths
+        setBirdPaths(data)
+    }
+
+    const togglePause = useCallback(() => {
+        toggleTimer(prevTimer => !prevTimer)
+        updateGameStatus(prevGameStatus => prevGameStatus === GAME_STATUS.LIVE ? GAME_STATUS.PAUSED : GAME_STATUS.LIVE)
+
+    }, [])
+
+    const restartLevel = useCallback(async () => {
+        updateGameStatus(GAME_STATUS.NEW_GAME)
+        toggleTimer(false)
+        setBirdPaths([])
+        setNewWave([])
+        progressBullets([])
+        addKill(0)
+        progressGameStep(0)
+        progressBirdShit([])
+        editHealth(userData.INITIAL_HEALTH)
+        moveGun(GAME_DATA.INITIAL_GUN_POSITION)
+        setWaveIndex(0)
+        generateLevel()
+    }, [userData])
+
+    const startGame = useCallback(async () => {
+        await restartLevel()
+        await toggleTimer(false)
+        await updateGameStatus(GAME_STATUS.LIVE)
+    }, [restartLevel])
+
     useEffect(() => {
+        if (gameStatus === GAME_STATUS.NEW_GAME) return;
+
         const interval = setInterval(() => {
             if (timerPaused) return () => clearInterval(interval);
             updateGameStep()
         }, GAME_DATA.GAME_PULSE);
 
         if (playerHealth < 0) {
-            updateGameStatus('END')
+            updateGameStatus(GAME_STATUS.LEVEL_COMPLETE)
             clearInterval(interval)
         }
 
@@ -267,7 +315,7 @@ export default function TheBirds() {
                 progressGameStep(0)
                 setWaveIndex(prevWaveIndex => prevWaveIndex + 1)
             } else {
-                updateGameStatus('END')
+                updateGameStatus(GAME_STATUS.LEVEL_COMPLETE)
                 clearInterval(interval)
             }
         }
@@ -276,42 +324,17 @@ export default function TheBirds() {
         return () => {
             clearInterval(interval)
         }
-    }, [updateGameStep, timerPaused, gameStep, wave, birdPaths, waveIndex, playerHealth]);
+    }, [updateGameStep, timerPaused, gameStep, wave, birdPaths, waveIndex, playerHealth, gameStatus]);
 
-    const generateLevel = () => {
-        console.time('Generating Level 0')
-        const data = generateLevel0()
-        console.timeEnd('Generating Level 0')
-
-        // set predetermined bird paths
-        setBirdPaths(data)
-    }
-
-    if (birdPaths === null) {
-        generateLevel()
-
-        return (
-            <div> Loading </div>
-        )
-    }
-
-    const restartLevel = () => {
-        toggleTimer(true)
-        generateLevel()// initial
-        progressBullets([])
-        addKill(0)
-        progressGameStep(0)
-        progressBirdShit([])
-        editHealth(userData.INITIAL_HEALTH)
-        updateGameStatus('STOP')
-        moveGun(GAME_DATA.INITIAL_GUN_POSITION)
-        setWaveIndex(0)
-    }
 
     return (
         <GameContainer>
-            {gameStatus === 'END' ? <GameEnd playerHealth={playerHealth} kills={kills} restartLevel={restartLevel} /> :
-                <BirdCage>
+            {
+                gameStatus === GAME_STATUS.NEW_GAME && <NewGame startGame={startGame} />
+            }
+
+            {
+                [GAME_STATUS.LIVE, GAME_STATUS.PAUSED].includes(gameStatus) && <BirdCage>
                     {
                         wave.map((bird, index) => (
                             <Bird birdShit={birdShit} key={index} positionMap={bird} gameStep={gameStep} index={index} />
@@ -328,29 +351,26 @@ export default function TheBirds() {
                         ))
                     }
                     <Gun position={gunPosition} />
-                    {/* <Paused isPaused={timerPaused} resume={() => toggleTimer(false)} /> */}
+                    {gameStatus === GAME_STATUS.PAUSED && <Paused newGame={() => updateGameStatus(GAME_STATUS.NEW_GAME)} resume={togglePause} />}
                 </BirdCage>
             }
-            <InfoBar>
-                <div>
-                    <button onClick={() => {
-                        toggleTimer(false)
-                        updateGameStatus('GO')
-                    }}>
-                        Start
-                    </button>
-                    <button onClick={() => toggleTimer(true)}>
-                        Pause
-                    </button>
-                    <button onClick={restartLevel}>
-                        Reset
-                    </button>
-                </div>
-                <p>
-                    Kills: {kills}
-                </p>
-                <HealthBar playerHealth={playerHealth} />
-            </InfoBar>
-        </GameContainer>
+            {
+                [GAME_STATUS.LEVEL_COMPLETE].includes(gameStatus) && <GameEnd newGame={() => updateGameStatus(GAME_STATUS.NEW_GAME)} playerHealth={playerHealth} kills={kills} restartLevel={restartLevel} />
+            }
+            {
+                ![GAME_STATUS.NEW_GAME, GAME_STATUS.LEVEL_COMPLETE].includes(gameStatus) &&
+                <InfoBar>
+                    <div>
+                        <button onClick={togglePause}>
+                            Menu
+                        </button>
+                    </div>
+                    <p>
+                        Kills: {kills}
+                    </p>
+                    <HealthBar playerHealth={playerHealth} />
+                </InfoBar>
+            }
+        </GameContainer >
     )
 }
