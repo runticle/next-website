@@ -3,8 +3,10 @@ import Bullet from "@/components/thebirds/Bullet"
 import Gun from "@/components/thebirds/Gun"
 import generateLevel0 from "@/components/thebirds/levelBuilder"
 import useEventListener from "@/utils/useEventListener"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useMemo } from "react"
 import { BirdCage, GameContainer, InfoBar } from "./styles"
+
+import debounce from 'lodash.debounce'
 
 import GAME_DATA from "./gameData"
 import Shit from "./Shit"
@@ -138,7 +140,7 @@ export default function TheBirds() {
 
             if (left && (!last || last === 'LEFT')) newX = Math.max(0, prevGunPosition.x - userData.GUN_SPEED);
             if (right && (!last || last === 'RIGHT')) newX = Math.min(1000, prevGunPosition.x + userData.GUN_SPEED);
-            if (up) newY = Math.min(800, prevGunPosition.y + userData.GUN_SPEED)
+            if (up) newY = Math.min(GAME_DATA.MAX_GUN_POSITION, prevGunPosition.y + userData.GUN_SPEED)
             if (down) newY = Math.max(0, prevGunPosition.y - userData.GUN_SPEED)
 
             return {
@@ -166,12 +168,19 @@ export default function TheBirds() {
         updateGunPosition()
     }, [bulletPositions, progressGameStep, checkForCollisions, updateBulletPositions, updateGunPosition, shitPositions, updateBirdShit])
 
+    // const fireBullet = useCallback(debounce(console.log, 1000), []);
+
+    const fireBullet = useCallback((position) => progressBullets(prevBulletPositions => ([...prevBulletPositions, position])), [progressBullets])
+    const pullTrigger = useMemo(() => debounce(fireBullet, userData.RELOAD_TIME, { leading: true }), [fireBullet, userData])
+
     const handleKeypress = useCallback((event) => {
         switch (event.charCode) {
             // spacebar is a bulleta
             case 32:
                 // and we need to throw a bullet into the mixer
-                progressBullets(prevBulletPositions => ([...prevBulletPositions, { x: gunPosition.x + (userData.GUN_WIDTH / 2) - (GAME_DATA.BULLET_SIZE / 2), y: gunPosition.y + userData.GUN_HEIGHT / 2 }]))
+                const position = { x: gunPosition.x + (userData.GUN_WIDTH / 2) - (GAME_DATA.BULLET_SIZE / 2), y: gunPosition.y + userData.GUN_HEIGHT / 2 }
+                pullTrigger(position)
+                // progressBullets(prevBulletPositions => ([...prevBulletPositions, position]))
                 break;
             case 97: // left (a)
                 changeButtonStatus(prevStatus => ({
@@ -200,7 +209,7 @@ export default function TheBirds() {
                 }))
                 break
         }
-    }, [progressBullets, gunPosition, changeButtonStatus, userData])
+    }, [gunPosition, changeButtonStatus, userData, fireBullet])
 
     const handleKeyUp = useCallback((event) => {
         // TODO store codes in variables 
