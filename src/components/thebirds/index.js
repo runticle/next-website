@@ -99,19 +99,18 @@ export default function TheBirds() {
             const bird_x = bird[gameStep].x;
             const bird_y = bird[gameStep].y;
 
+            // checking bullets hitting birds...
             for (const [bulletIndex, bullet] of bulletPositions.entries()) {
-                if (
-                    bullet.x + GAME_DATA.BULLET_SIZE > bird_x
-                    && bullet.x < bird_x + GAME_DATA.BIRD_WIDTH
-                    && bird_y > 1000 - bullet.y - GAME_DATA.BULLET_SIZE - GAME_DATA.BIRD_HEIGHT
-                    && bird_y < 1000 - bullet.y
-                ) {
-                    killbird(birdIndex, bulletIndex)
-                }
+                if (bird_y > 1000 - bullet.y) continue // bullet not reached yet
+                if (bird_y < 1000 - bullet.y - GAME_DATA.BULLET_SIZE - GAME_DATA.BIRD_HEIGHT) continue // bullet gone past
+                if (bullet.x + GAME_DATA.BULLET_SIZE < bird_x) continue
+                if (bullet.x > bird_x + GAME_DATA.BIRD_WIDTH) continue
+
+                killbird(birdIndex, bulletIndex)
             }
         }
 
-
+        // checking shit hitting player
         for (const [shitIndex, shit] of shitPositions.entries()) {
             const shit_x = shit.x;
             const shit_y = shit.y;
@@ -126,6 +125,7 @@ export default function TheBirds() {
             }
 
         }
+
 
     }, [bulletPositions, wave, killbird, gameStep, shitPositions, gunPosition, playerHit, userData])
 
