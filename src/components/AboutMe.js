@@ -7,6 +7,7 @@ const AboutMeStyles = styled.div`
     justify-content: space-between;
     align-items: center;
     height: calc(100vh - 200px);
+    margin-bottom: var(--spacing);
 
     @media screen and (max-width: 767px) {
         flex-direction: column-reverse;
