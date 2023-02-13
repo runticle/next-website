@@ -97,7 +97,7 @@ export default function Timeline() {
 
     return (
         <TimelineStyle>
-            <div class="scrollbox">
+            <div className="scrollbox">
                 {
                     experience.map(({ company, title, dateString }, index) => (
                         <TimeBox key={index}>
