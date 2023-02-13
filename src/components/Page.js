@@ -63,15 +63,19 @@ const GlobalStyles = createGlobalStyle`
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
+
+        text-align: center; // default text align should be center for now.
+        color: var(--lightGreen); // same with default text color, lightGreen. Specify if other in code.
     }
 
     a {
         text-decoration: none;
-        color: var(--black);
+        color: var(--lightGreen);
     }
 
     a:hover {
         text-decoration: underline;
+        color: var(--middleGreen);
     }
 
     button {
