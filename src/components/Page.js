@@ -95,7 +95,7 @@ export default function Page({ children }) {
       <GlobalStyles />
       <Header />
       <InnerStyles>{children}</InnerStyles>
-      <CVDownload />
+      {/* <CVDownload />  TODO, temporarily disabled 13/2/23 AF. Will turn into an email CTA once email setup. */}
       <Footer />
     </div>
   );
