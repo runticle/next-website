@@ -92,16 +92,16 @@ const LeavesStyle = styled.div`
 export default function Leaves() {
   return (
     <LeavesStyle>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
+      <div className="leaf"></div>
+      <div className="leaf"></div>
+      <div className="leaf"></div>
+      <div className="leaf"></div>
+      <div className="leaf"></div>
+      <div className="leaf"></div>
+      <div className="leaf"></div>
+      <div className="leaf"></div>
+      <div className="leaf"></div>
+      <div className="leaf"></div>
     </LeavesStyle>
   )
 }

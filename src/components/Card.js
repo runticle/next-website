@@ -22,7 +22,7 @@ const CardStyles = styled.div`
   cursor: ${props => !!props.action ? 'pointer' : 'unset'};
 
   &:focus, :hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
         --displayArrow: unset;
 
         @media screen and (max-width: 767px) {
@@ -37,6 +37,7 @@ const CardStyles = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    text-align: left;
 
     .text{
         

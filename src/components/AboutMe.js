@@ -7,6 +7,7 @@ const AboutMeStyles = styled.div`
     justify-content: space-between;
     align-items: center;
     height: calc(100vh - 200px);
+    margin-bottom: var(--spacing);
 
     @media screen and (max-width: 767px) {
         flex-direction: column-reverse;
@@ -41,6 +42,7 @@ const TextContainer = styled.div`
     padding-right: var(--spacing);
     color: var(--lightGreen);
     line-height: 2rem;
+    text-align: left;
 
     @media screen and (max-width: 767px) {
         width: 100%;
@@ -50,12 +52,12 @@ const TextContainer = styled.div`
 export default function AboutMe() {
 
     const title = `Hi, I'm Alfie`
-    const subtitle = `A web developer`
+    const subtitle = `React & React Native developer`
     const description =
         [
             `I have officially been in the software world for 4 years, but have had my toes dipped for a little longer`,
             `I co-founded a successful Bitcoin Brokerage in 2013`,
-            `I most recently worked at LeSalon - a startup based in London`,
+            `I recently left my role as senior developer at LeSalon - a startup based in London`,
             `Then I went travelling for ages`,
             `Now I am looking for my next adventure`,
         ]

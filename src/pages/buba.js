@@ -16,9 +16,8 @@ export default function Buba() {
   }))
 
   const introduction = [
-    'Here is a selection of photos of the best dog ever, Buba.',
-    'I found her in Poland in 2019.',
-    'I think she might be a mix between a mini pinscher and a jack russell, but I do not know for sure.',
+    'Here is a selection of photos of Buba.',
+    'I found her in 2019.',
   ]
 
   return (

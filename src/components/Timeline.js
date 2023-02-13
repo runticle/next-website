@@ -8,6 +8,7 @@ const TimelineStyle = styled.div`
     max-width: 1000px;
     margin: 0 auto;
     flex-direction: column;
+    height: 100vh;
 
     // only for mobile
     @media screen and (min-width: 767px) {
@@ -97,7 +98,7 @@ export default function Timeline() {
 
     return (
         <TimelineStyle>
-            <div class="scrollbox">
+            <div className="scrollbox">
                 {
                     experience.map(({ company, title, dateString }, index) => (
                         <TimeBox key={index}>

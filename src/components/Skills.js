@@ -37,7 +37,7 @@ export default function Skills() {
     return (
         <SkillsStyle>
             <h1>
-                i can <TypeWriter words={tech} />
+                <TypeWriter words={tech} />
             </h1>
         </SkillsStyle >
 

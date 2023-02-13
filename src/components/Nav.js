@@ -149,7 +149,7 @@ export default function Nav() {
     <Link onClick={() => toggleMenu(false)} href="/">Home</Link>
     <Link onClick={() => toggleMenu(false)} href="/stuff">Stuff</Link>
     <Link onClick={() => toggleMenu(false)} href="/photos">Photos</Link>
-    <Link onClick={() => toggleMenu(false)} target="_blank" href="/AlfieFreemanCV.pdf">CV</Link>
+    {/* <Link onClick={() => toggleMenu(false)} target="_blank" href="/AlfieFreemanCV.pdf">CV</Link> */}
     <Link onClick={() => toggleMenu(false)} href="/contact">Contact</Link>
   </>
 
