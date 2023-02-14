@@ -24,16 +24,28 @@ const GlobalStyles = createGlobalStyle`
         font-style: normal;
     }
     @font-face {
+        font-family: 'tender';
+        src: url('/tender.otf') format("opentype");
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
         font-family: 'mytype';
         src: url('/mytype.ttf') format("truetype");
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'actors';
+        src: url('/actors.ttf') format("truetype");
         font-weight: normal;
         font-style: normal;
     }
 
    /* setup variables */
    html {
-      --fontHeading: 'textured', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      --fontBody: 'rounded', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --fontHeading: 'tender', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --fontBody: 'tender', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       --red: #ff0000;
       --black: #393939;
       --grey: #3A3A3A;
@@ -63,6 +75,8 @@ const GlobalStyles = createGlobalStyle`
 
     h1, h2, h3 {
       font-family: var(--fontHeading);
+      text-transform: uppercase;
+      font-size: 32px;
     }
 
     body {
@@ -71,8 +85,8 @@ const GlobalStyles = createGlobalStyle`
         padding-top: 145px; // the header.
         margin: 0;
         margin-bottom: var(--footerHeight, 100px);
-        font-size:1.5rem;
-        line-height: 2;
+        font-size: 18px;
+        line-height: 1;
         min-height: 100vh;
         background: linear-gradient(170deg, var(--lightGreen) 0%, var(--middleGreen) 50%, var(--darkGreen) 100%); 
         background: var(--darkGreen);

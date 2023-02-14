@@ -7,7 +7,6 @@ const Desktop = styled.ul`
   margin: 0;
   padding: 0;
   display: flex;
-  font-size: 2rem;
   font-family: 'regular', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
 
   @media screen and (max-width: 767px) {
@@ -21,7 +20,6 @@ const Desktop = styled.ul`
     align-items: center;
     position: relative;
     text-transform: uppercase;
-    font-size: 1em;
     background: none;
 
     height: 100%;
@@ -103,7 +101,6 @@ const Mobile = styled.div`
       h1 {
         padding: 0;
         margin: 0;
-        font-size: 3rem;
         margin: var(--spacing) 0;
       }
   
@@ -121,8 +118,7 @@ const Mobile = styled.div`
       display: flex;
       align-items: center;
       position: relative;
-      text-transform: uppercase;
-      font-size: 1em;
+      text-transform: uppercase; */
       background: none;
 
       color: var(--darkGreen);

@@ -17,7 +17,6 @@ const LifeTreeStyle = styled.div`
 
     .information {
         color: var(--darkGreen);
-        font-size: 1.1rem;
     }
 
     // not for mobile

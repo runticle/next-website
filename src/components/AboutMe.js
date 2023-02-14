@@ -52,14 +52,12 @@ const TextContainer = styled.div`
 export default function AboutMe() {
 
     const title = `Hi, I'm Alfie`
-    const subtitle = `React & React Native developer`
+    const subtitle = `Web & App developer`
     const description =
         [
             `I have officially been in the software world for 4 years, but have had my toes dipped for a little longer`,
             `I co-founded a successful Bitcoin Brokerage in 2013`,
             `I recently left my role as senior developer at LeSalon - a startup based in London`,
-            `Then I went travelling for ages`,
-            `Now I am looking for my next adventure`,
         ]
 
 

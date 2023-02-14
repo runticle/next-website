@@ -2,7 +2,6 @@ import Image from 'next/image';
 import styled from 'styled-components';
 
 const CardStyles = styled.div`
-  font-size: 3rem;
   z-index: 2;
   width: 80%;
   margin: 0 auto;
@@ -21,36 +20,23 @@ const CardStyles = styled.div`
 
   cursor: ${props => !!props.action ? 'pointer' : 'unset'};
 
-  &:focus, :hover {
-        transform: scale(1.05);
-        --displayArrow: unset;
+    &:focus, :hover {
+            transform: scale(1.05);
+            --displayArrow: unset;
 
-        @media screen and (max-width: 767px) {
-            transform: unset;
-        }
-  }
-
-  .text-contents {
-    padding: 0 var(--spacing);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-
-    .text{
-        
-        h1{
-            font-size: 2rem;
-        }
-        
-        p {
-            font-size: 1rem;
-        }
+            @media screen and (max-width: 767px) {
+                transform: unset;
+            }
     }
 
-
+    .text-contents {
+        padding: 0 var(--spacing);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
     }
 `;
 
