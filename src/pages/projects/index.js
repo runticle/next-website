@@ -22,12 +22,12 @@ export default function Projects() {
         //   imageUrl: "/buba.jpg",
         //   action: () => Router.push({ pathname: `/buba` })
         // },
-        // {
-        //   title: 'MakerzRich',
-        //   description: 'Educational game built in react',
-        //   imageUrl: "/buba.jpg",
-        //   action: () => Router.push({ pathname: `/buba` })
-        // },
+        {
+            title: 'MakersRich',
+            description: 'Educational game built in react',
+            imageUrl: "/makersrich.png",
+            action: () => Router.push({ pathname: `/projects/makersrich` })
+        },
     ]
 
     return (

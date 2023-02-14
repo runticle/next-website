@@ -42,7 +42,8 @@ const GlobalStyles = createGlobalStyle`
       --borderWidth: 2px;
       --inputHeight: 80px;
       --spacing: 20px; // used for all generic passing and margin etc.
-      --boxShadowSection: box-shadow: rgba(145,106,112,0.2) 0 6px 24px;
+      /* --boxShadowSection: rgba(145,106,112,0.2) 0 6px 24px; */
+      --boxShadowSection: rgba(214,239,199,0.3) 0 6px 24px;
       box-sizing: border-box;
       font-size: 62.5%; // set defalt font size to 10px.
       height: 100%;
