@@ -1,4 +1,4 @@
-import NothingToSee from '@/components/NothingToSee'
+import NothingToSee from '@/components/shared/NothingToSee'
 import Head from 'next/head'
 
 export default function Photos() {

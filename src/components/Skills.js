@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import TypeWriter from './TypeWriter';
+import TypeWriter from './shared/TypeWriter';
 
 const SkillsStyle = styled.div`
 

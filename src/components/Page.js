@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
-import CVDownload from './CVDownload';
+import CVDownload from './shared/CVDownload';
 import Footer from './Footer';
 import Header from './Header';
 

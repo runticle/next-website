@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Card from "./Card"
-import NothingToSee from "./NothingToSee"
+import Card from "./shared/Card"
+import NothingToSee from "./shared/NothingToSee"
 
 const StuffsStyles = styled.div`
     display: grid;
