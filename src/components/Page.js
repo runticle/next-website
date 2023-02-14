@@ -87,7 +87,7 @@ const GlobalStyles = createGlobalStyle`
         margin-bottom: var(--footerHeight, 100px);
         font-size: 18px;
         line-height: 1;
-        min-height: 100vh;
+        min-height: 100%;
         background: linear-gradient(170deg, var(--lightGreen) 0%, var(--middleGreen) 50%, var(--darkGreen) 100%); 
         background: var(--darkGreen);
         background-repeat: no-repeat;
