@@ -5,9 +5,9 @@ import Router from 'next/router'
 export default function Stuff() {
   const stuff = [
     // {
-    //   title: 'Spooky Video',
-    //   description: "Dad made this for visuals for a Halloween party.",
-    //   imageUrl: "https://res.cloudinary.com/dvvgwzzwu/image/upload/v1675682774/buba-stills/5_yzsb7g.jpg",
+    //   title: 'Garden Gremlins',
+    //   description: "Arcade style shooter game built in react for my dads birthday.",
+    //   imageUrl: "/images/thebirds/thebirds.jpg",
     // },
     {
       title: 'Buba',

@@ -6,8 +6,9 @@ export const Logo = styled.h1`
   font-size: 3rem;
   z-index: 2;
   position: relative;
+
   a {
-    color: var(--black, black);
+    color: var(--lightGreen);
     text-decoration: none;
     text-transform: uppercase;
     padding: 0;
@@ -15,6 +16,13 @@ export const Logo = styled.h1`
 `;
 
 const HeaderStyles = styled.header`
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 9999;
+  background: var(--darkGreen);
+
   .bar {
     border-bottom: var(--borderWidth, 5px) solid var(--lightGreen, lightGreen);
     padding: var(--spacing);

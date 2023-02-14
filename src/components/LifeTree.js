@@ -16,7 +16,7 @@ const LifeTreeStyle = styled.div`
     --stemThickness: 6px;
 
     .information {
-        color: white;
+        color: var(--darkGreen);
         font-size: 1.1rem;
     }
 
@@ -46,6 +46,7 @@ const Trunk = styled.div`
       );
     background-size: auto 50%;
     animation: growing 3s linear infinite;
+    box-shadow: var(--boxShadowSection);
 
 `
 
@@ -68,9 +69,12 @@ const LeafBristol = styled.div`
     );
     padding: calc(var(--spacing) * 2);
 
+
     .information {
         transform: rotate(-20deg);
     }
+
+    box-shadow: var(--boxShadowSection);
 `
 
 // quick coins leaf
@@ -95,6 +99,8 @@ const LeafQuickCoins = styled.div`
     .information {
         transform: rotate(20deg);
     }
+
+    box-shadow: var(--boxShadowSection);
 `
 
 // emtec leaf
@@ -121,6 +127,8 @@ const LeafEmtec = styled.div`
         transform: rotate(-20deg);
     }
 
+    box-shadow: var(--boxShadowSection);
+
  
 `
 
@@ -146,6 +154,8 @@ const LeafMakers = styled.div`
     .information {
         transform: rotate(20deg);
     }
+
+    box-shadow: var(--boxShadowSection);
 `
 
 // lesalon leaf
@@ -170,6 +180,8 @@ const LeafLeSalon = styled.div`
     .information {
         transform: rotate(-20deg);
     }
+
+    box-shadow: var(--boxShadowSection);
 `
 
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
-import CVDownload from './CVDownload';
+import CVDownload from './shared/CVDownload';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -39,9 +39,11 @@ const GlobalStyles = createGlobalStyle`
       --maxWidth: 1400px;
       --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
       --footerHeight: 50px;
-      --borderWidth: 5px;
+      --borderWidth: 2px;
       --inputHeight: 80px;
       --spacing: 20px; // used for all generic passing and margin etc.
+      /* --boxShadowSection: rgba(145,106,112,0.2) 0 6px 24px; */
+      --boxShadowSection: rgba(214,239,199,0.3) 0 6px 24px;
       box-sizing: border-box;
       font-size: 62.5%; // set defalt font size to 10px.
       height: 100%;
@@ -54,12 +56,14 @@ const GlobalStyles = createGlobalStyle`
     body {
         font-family: 'rounded', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         padding: 0;
+        padding-top: 145px; // the header.
         margin: 0;
         margin-bottom: var(--footerHeight, 100px);
         font-size:1.5rem;
         line-height: 2;
-        height: 100vh;
+        min-height: 100vh;
         background: linear-gradient(170deg, var(--lightGreen) 0%, var(--middleGreen) 50%, var(--darkGreen) 100%); 
+        background: var(--darkGreen);
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
@@ -73,9 +77,9 @@ const GlobalStyles = createGlobalStyle`
         color: var(--lightGreen);
     }
 
-    a:hover {
+    a:hover, a:focus, a:active {
         text-decoration: underline;
-        color: var(--middleGreen);
+        color: var(--darkGreen);
     }
 
     button {

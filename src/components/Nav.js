@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import styled from 'styled-components';
-import { Logo } from './Header';
 
 const Desktop = styled.ul`
   margin: 0;
@@ -62,7 +61,7 @@ const Toggle = styled.div`
 
 const Mobile = styled.div`
     display: ${props => props.toggle ? "unset" : "none"};
-    color: white;
+    color: var(--darkGreen);
 
     position: fixed; 
     right: 0;
@@ -70,7 +69,8 @@ const Mobile = styled.div`
     top: 0;
     bottom: 0;
 
-    background: linear-gradient(15deg, var(--lightGreen) 0%, var(--middleGreen) 50%, var(--darkGreen) 100%);
+    /* background: linear-gradient(15deg, var(--lightGreen) 0%, var(--middleGreen) 50%, var(--darkGreen) 100%); */
+    background: var(--lightGreen);
 
     z-index: 2;
 
@@ -83,12 +83,12 @@ const Mobile = styled.div`
     @keyframes fadeInOpacity {
       0% { 
         opacity: 0;
-        color: black;
+        /* color: black; */
       };
       
       100% { 
         opacity: 1; 
-        color: white;
+        /* color: white; */
       }
     }
 
@@ -98,7 +98,7 @@ const Mobile = styled.div`
       justify-content: space-between;
       align-items: stretch;
       padding: var(--spacing);
-      border-bottom: var(--borderWidth, 5px) solid var(--lightGreen, lightGreen);
+      border-bottom: var(--borderWidth, 5px) solid var(--darkGreen);
 
       h1 {
         padding: 0;
@@ -125,7 +125,7 @@ const Mobile = styled.div`
       font-size: 1em;
       background: none;
 
-      color: white;
+      color: var(--darkGreen);
 
       cursor: pointer;
 
@@ -147,8 +147,9 @@ export default function Nav() {
 
   const links = <>
     <Link onClick={() => toggleMenu(false)} href="/">Home</Link>
+    <Link onClick={() => toggleMenu(false)} href="/projects">Projects</Link>
     <Link onClick={() => toggleMenu(false)} href="/stuff">Stuff</Link>
-    <Link onClick={() => toggleMenu(false)} href="/photos">Photos</Link>
+    {/* <Link onClick={() => toggleMenu(false)} href="/photos">Photos</Link> */}
     {/* <Link onClick={() => toggleMenu(false)} target="_blank" href="/AlfieFreemanCV.pdf">CV</Link> */}
     <Link onClick={() => toggleMenu(false)} href="/contact">Contact</Link>
   </>

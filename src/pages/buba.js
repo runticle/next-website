@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import bubaPhotoKeys from '@/utils/bubaPhotoKeys';
 import Stuffs from '@/components/Stuffs';
-import TextBlock from '@/components/TextBlock';
+import TextBlock from '@/components/shared/TextBlock';
 
 export default function Buba() {
   const base = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/c_fill,w_500,h_500/v1675682672/buba-stills/`

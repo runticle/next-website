@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CVDownload from './CVDownload';
+import CVDownload from './shared/CVDownload';
 
 const TimelineStyle = styled.div`
     display: flex;
