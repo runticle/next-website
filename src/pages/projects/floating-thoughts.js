@@ -11,7 +11,7 @@ export default function FloatingThoughts() {
         "It was very simple to code. I just used it to learn more about css transitions and animations."
     ]
 
-    const websiteUrl = 'todo.alfiefreeman.co.uk';
+    const websiteUrl = 'https://todo.alfiefreeman.co.uk';
 
     const imageSrc = '/FloatingThoughts.png';
 

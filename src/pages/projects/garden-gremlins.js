@@ -11,7 +11,7 @@ export default function GardenGremlins() {
         "It is built in React, which isn't very good for building games, but it was a lot of fun to make."
     ]
 
-    const websiteUrl = 'thebirds.alfiefreeman.co.uk';
+    const websiteUrl = 'https://thebirds.alfiefreeman.co.uk';
 
     const imageSrc = '/images/thebirds/thebirds.jpg';
 
