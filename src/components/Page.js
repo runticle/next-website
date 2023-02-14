@@ -23,9 +23,17 @@ const GlobalStyles = createGlobalStyle`
         font-weight: normal;
         font-style: normal;
     }
+    @font-face {
+        font-family: 'mytype';
+        src: url('/mytype.ttf') format("truetype");
+        font-weight: normal;
+        font-style: normal;
+    }
 
    /* setup variables */
    html {
+      --fontHeading: 'textured', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --fontBody: 'rounded', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       --red: #ff0000;
       --black: #393939;
       --grey: #3A3A3A;
@@ -53,8 +61,12 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: inherit;
     }
 
+    h1, h2, h3 {
+      font-family: var(--fontHeading);
+    }
+
     body {
-        font-family: 'rounded', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: var(--fontBody);
         padding: 0;
         padding-top: 145px; // the header.
         margin: 0;
@@ -83,7 +95,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     button {
-        font-family: 'rounded', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: var(--fontHeading)
     }
 `;
 
