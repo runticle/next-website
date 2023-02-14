@@ -16,7 +16,7 @@ const LifeTreeStyle = styled.div`
     --stemThickness: 6px;
 
     .information {
-        color: white;
+        color: var(--darkGreen);
         font-size: 1.1rem;
     }
 

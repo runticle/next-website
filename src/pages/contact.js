@@ -11,9 +11,11 @@ export default function Contact() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* <ContactForm /> TODO. Disabled AF 13/2/23 Reinstate once email is configured. */}
-      <p>
-        You can email me at <a href="mailto:runticle@gmail.com?subject=Hello%20Aflie&body=Hi%20Alfie%2C%0D%0A%0D%0A...%0D%0A%0D%0ABye%20Alfie">runticle@gmail.com</a>
-      </p>
+      <body>
+        <p>
+          You can email me at <a href="mailto:runticle@gmail.com?subject=Hello%20Aflie&body=Hi%20Alfie%2C%0D%0A%0D%0A...%0D%0A%0D%0ABye%20Alfie">runticle@gmail.com</a>
+        </p>
+      </body>
     </>
   )
 }

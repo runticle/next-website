@@ -81,7 +81,7 @@ export const useTypingText = (
 
 const TypingText = styled.span`
     >span {
-        color: black;
+        color: var(--lightGreen);
         position: relative;
     }
 

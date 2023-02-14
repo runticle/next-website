@@ -3,11 +3,11 @@ import styled from "styled-components"
 const FooterStyles = styled.div`
     border-top: var(--borderWidth, 5px) solid var(--lightGreen, lightGreen);
     height: var(--footerHeight, 100px);
-    bottom: 0;
+    /* bottom: 0;
     left: 0;
     right: 0;
     text-align: center;
-    position: fixed;
+    position: fixed; */
     margin: 0;
     padding: 0;
     background-color: var(--darkGreen);
