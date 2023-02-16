@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 const TextStyle = styled.div`
+    padding: var(--spacing);
     text-align: center;
 `
 

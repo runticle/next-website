@@ -1,35 +1,45 @@
+import Project from '@/components/Project'
 import Stuffs from '@/components/Stuffs'
 import Head from 'next/head'
 import Router from 'next/router'
 
-export default function Projects() {
-    const stuff = [
-        {
-            title: 'Garden Gremlins',
-            description: "Arcade style shooter game built in react for my dads birthday.",
-            imageUrl: "/images/thebirds/thebirds.jpg",
-            action: () => Router.push({ pathname: `/projects/garden-gremlins` })
-        },
-        {
-            title: 'Floating Thoughts',
-            description: "Fun way to visualise your thoughts.",
-            imageUrl: "/FloatingThoughts.png", // TODO photo of bubble
-            action: () => Router.push({ pathname: `/projects/floating-thoughts` })
-        },
-        // {
-        //   title: 'Buba',
-        //   description: 'Photos of my best pal',
-        //   imageUrl: "/buba.jpg",
-        //   action: () => Router.push({ pathname: `/buba` })
-        // },
-        {
-            title: 'MakersRich',
-            description: 'Educational game built in react',
-            imageUrl: "/makersrich.png",
-            action: () => Router.push({ pathname: `/projects/makersrich` })
-        },
-    ]
 
+const projects = [
+    {
+        title: "Floating Thoughts",
+        introduction: [
+            "I use this for visualising my todo list.",
+            "You can add your thoughts or ideas and they float around aimlessly until you pop them.",
+            "It was very simple to code. I just used it to learn more about css transitions and animations."
+        ],
+        websiteUrl: 'https://todo.alfiefreeman.co.uk',
+        githubUrl: 'https://github.com/runticle/floating-thoughts',
+        imageSrc: '/FloatingThoughts.png',
+    },
+    {
+        title: "Garden Gremlins",
+        introduction: [
+            "A simple arcade style shooting game Imade for my dads birthday",
+            "You can shoot birds and try to avoid the falling shit or you will die.",
+            "It is built in React, which isn't very good for building games, but it was a lot of fun to make."
+        ],
+        websiteUrl: 'https://thebirds.alfiefreeman.co.uk',
+        githubUrl: 'https://github.com/runticle/garden-gremlins',
+        imageSrc: '/images/thebirds/thebirds.jpg',
+    },
+    {
+
+        title: "Makersrich",
+        introduction: [
+            "An educational game built in React that my group made for our final project at Makers Academy.",
+            "Sadly the repo has disappeared so it is no more."
+        ],
+        websiteUrl: null,
+        imageSrc: '/makersrich.png',
+    }
+]
+
+export default function Projects() {
     return (
         <>
             <Head>
@@ -38,7 +48,11 @@ export default function Projects() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Stuffs stuff={stuff} />
+            {
+                projects.map((project, index) => <Project key={index} {...project} />)
+            }
+
+
         </>
     )
 }
