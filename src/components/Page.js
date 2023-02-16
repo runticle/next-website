@@ -73,6 +73,10 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: inherit;
     }
 
+    p {
+      margin: var(--spacing) 0;
+    }
+
     h1, h2, h3 {
       font-family: var(--fontHeading);
       text-transform: uppercase;
@@ -82,7 +86,7 @@ const GlobalStyles = createGlobalStyle`
     body {
         font-family: var(--fontBody);
         padding: 0;
-        padding-top: 145px; // the header.
+        padding-top: 120px; // the header.
         margin: 0;
         margin-bottom: var(--footerHeight, 100px);
         font-size: 18px;

@@ -19,6 +19,8 @@ const HeaderStyles = styled.header`
   top: 0;
   right: 0;
   left: 0;
+  height: 120px;
+  box-sizing: border-box;
   z-index: 9999;
   background: var(--darkGreen);
 
@@ -29,6 +31,7 @@ const HeaderStyles = styled.header`
     grid-template-columns: auto 1fr;
     justify-content: space-between;
     align-items: stretch;
+    height: 100%;
   }
 `;
 

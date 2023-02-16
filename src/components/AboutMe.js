@@ -55,9 +55,10 @@ export default function AboutMe() {
     const subtitle = `Web & App developer`
     const description =
         [
-            `I have officially been in the software world for 4 years, but have had my toes dipped for a little longer`,
             `I co-founded a successful Bitcoin Brokerage in 2013`,
-            `I recently left my role as senior developer at LeSalon - a startup based in London`,
+            `But I studied and worked in Mechanical and Acoustic engineering until 2018...`,
+            `...and then did a coding bootcamp at Makers Academy in London`,
+            `Senior developer at LeSalon - a startup based in London`,
         ]
 
 
