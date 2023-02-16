@@ -1,7 +1,5 @@
-import Project from '@/components/Project'
-import Stuffs from '@/components/Stuffs'
-import Head from 'next/head'
-import Router from 'next/router'
+import Project from '@/components/Project';
+import Head from 'next/head';
 
 
 const projects = [
