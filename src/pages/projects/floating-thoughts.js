@@ -12,6 +12,7 @@ export default function FloatingThoughts() {
     ]
 
     const websiteUrl = 'https://todo.alfiefreeman.co.uk';
+    const githubUrl = 'https://github.com/runticle/floating-thoughts';
 
     const imageSrc = '/FloatingThoughts.png';
 
@@ -23,7 +24,7 @@ export default function FloatingThoughts() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Project title={title} introduction={introduction} websiteUrl={websiteUrl} imageSrc={imageSrc} />
+            <Project title={title} introduction={introduction} websiteUrl={websiteUrl} imageSrc={imageSrc} githubUrl={githubUrl} />
         </>
     )
 

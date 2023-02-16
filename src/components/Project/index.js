@@ -1,5 +1,6 @@
 import TextBlock from '@/components/shared/TextBlock';
 import Image from 'next/image';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const ProjectStyles = styled.main`
@@ -7,40 +8,48 @@ const ProjectStyles = styled.main`
 `
 
 const Section = styled.section`
-    max-width: 1000px;
+    max-width: 700px;
     margin: 0 auto;
     background: var(--lightGreen);
     border-radius: var(--spacing);
     box-shadow: var(--boxShadowSection);
-    padding: var(--spacing);
     
-    background: linear-gradient(170deg, var(--lightGreen) 0%, var(--middleGreen) 100%); 
+    background: linear-gradient(45deg, var(--lightGreen) 0%, var(--middleGreen) 100%); 
 
-    a{
-        text-decoration: underline;
+    .project-links {
+        padding-bottom: calc(var(--spacing) * 2);
+            a {
+                font-family: 'rounded';
+                padding: var(--spacing) var(--spacing);
+            text-transform: uppercase;
+            background: none;
+            border-radius: 80% 0; // leaf shape
+            
+            cursor: pointer;
+            
+            &:hover,
+            &:focus {
+                background: var(--lightGreen, lightGreen);
+                outline: none;
+                text-decoration:none;
+            }
+        }
     }
-    
+
     * {
         color: var(--darkGreen);
     }
 
     .imageBox {
-        width: 70%;
-        /* height: 350px; */
+        width: 100%;
         overflow: hidden;
-        max-width: 600px;
-        max-height: 350px;
-
-        margin: 0 auto;
-
-         > div {
-            position: unset !important;
-        }
+        max-height: 400px;
+        border-top-left-radius: var(--spacing);
+        border-top-right-radius: var(--spacing);
 
         @media screen and (max-width: 768px) {
             width: 100%;
         }
-
 
         .image {
             object-fit: cover;
@@ -52,7 +61,7 @@ const Section = styled.section`
     
 `
 
-export default function Project({ title, introduction, websiteUrl, imageSrc }) {
+export default function Project({ title, introduction, websiteUrl, imageSrc, githubUrl }) {
 
     return (
         <ProjectStyles>
@@ -60,17 +69,23 @@ export default function Project({ title, introduction, websiteUrl, imageSrc }) {
                 {title}
             </h1>
             <Section>
-                <TextBlock text={introduction} />
-                {
-                    websiteUrl ? <p>
-                        You can play around with it <a href={websiteUrl} alt={websiteUrl} target="_blank" rel="noreferrer">here</a>
-                    </p> : null
-                }
                 <div className="imageBox">
                     <div className="image-overlay">
                         <Image src={imageSrc} alt={title + ' screenshot'} fill className="image" />
                     </div>
                 </div>
+                <TextBlock text={introduction} />
+                {
+                    websiteUrl || githubUrl ? <div className="project-links">
+                        {
+                            websiteUrl ? <Link href={websiteUrl} alt={websiteUrl} target="_blank" rel="noreferrer">Play</Link> : null
+                        }
+                        {
+                            githubUrl ? <Link href={websiteUrl} alt={githubUrl} target="_blank" rel="noreferrer">Github</Link> : null
+                        }
+                    </div>
+                        : null
+                }
             </Section>
         </ProjectStyles>
     )

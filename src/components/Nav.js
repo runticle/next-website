@@ -118,7 +118,7 @@ const Mobile = styled.div`
       display: flex;
       align-items: center;
       position: relative;
-      text-transform: uppercase; */
+      text-transform: uppercase;
       background: none;
 
       color: var(--darkGreen);
