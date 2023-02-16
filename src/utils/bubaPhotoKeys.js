@@ -31,7 +31,6 @@ export default [
     '28_idv4jn',
     '7_qqiyrg',
     '14_b9dcjt',
-    '10_uvnfqz',
     '15_rttusf',
     '16_y5s4jg',
 ]
