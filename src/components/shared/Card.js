@@ -3,17 +3,14 @@ import styled from 'styled-components';
 
 const CardStyles = styled.div`
   z-index: 2;
-  width: 80%;
-  margin: 0 auto;
-  margin-top: calc(var(--spacing) * 2);
-  transition: transform .3s;
+  padding: 10px;
+  transition: transform 0.6s;
 
   --displayArrow: none;
 
   @media screen and (max-width: 767px) {
     width: 100%;
-    margin-top: 0;
-    margin-bottom: var(--spacing);
+    padding: 10px 0;
 
     --displayArrow: unset
   }
@@ -21,51 +18,55 @@ const CardStyles = styled.div`
   cursor: ${props => !!props.action ? 'pointer' : 'unset'};
 
     &:focus, :hover {
-            transform: scale(1.05);
+            transform: scale(1.04);
             --displayArrow: unset;
 
             @media screen and (max-width: 767px) {
                 transform: unset;
             }
     }
-
-    .text-contents {
-        padding: 0 var(--spacing);
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        text-align: left;
-    }
 `;
+
+const TextContents = styled.div`
+    padding: 0 var(--spacing);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+
+    opacity: 0.7;
+    background-color: black;
+
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+`
 
 const ImageContainer = styled.div`
     width: 100%;
-    height: 400px;
-    border-radius: 15px;
+    border-radius: 3px;
     overflow: hidden;
-
-    > div {
-    position: unset !important;
-    }
+    position: relative;
 
     .image {
-    object-fit: cover;
-    width: 100% !important;
-    position: relative !important;
-    height: 100% !important;
+        object-fit: cover;
+        width: 100% !important;
+        position: relative !important;
+        height: 100% !important;
     }
 `;
 
 const Arrow = styled.div`
-
     @keyframes fadeIn {
         0% { opacity: 0; }
         100% { opacity: 1; }
     }
 
-    border: solid var(--black, black);
+    border: solid var(--lightGreen);
     border-width: 0 3px 3px 0;
     padding: 4px;
     transform: rotate(-45deg);
@@ -83,24 +84,24 @@ export default function Card({ title, description, imageUrl, action = null }) {
         <CardStyles onClick={action} action={action}>
             <ImageContainer>
                 <Image src={imageUrl} alt={title} fill className={'image'} />
+                {!!title || !!description ?
+                    <TextContents>
+                        <div className="text">
+                            {!!title &&
+                                <h1>
+                                    {title}
+                                </h1>
+                            }
+                            {!!description &&
+                                <p>
+                                    {description}
+                                </p>
+                            }
+                        </div>
+                        {!!action && <Arrow />}
+                    </TextContents>
+                    : null}
             </ImageContainer>
-            {!!title || !!description ?
-                <div className="text-contents">
-                    <div className="text">
-                        {!!title &&
-                            <h1>
-                                {title}
-                            </h1>
-                        }
-                        {!!description &&
-                            <p>
-                                {description}
-                            </p>
-                        }
-                    </div>
-                    {!!action && <Arrow />}
-                </div>
-                : null}
         </CardStyles>
     );
 }

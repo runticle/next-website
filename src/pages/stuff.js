@@ -4,23 +4,12 @@ import Router from 'next/router'
 
 export default function Stuff() {
   const stuff = [
-    // {
-    //   title: 'Garden Gremlins',
-    //   description: "Arcade style shooter game built in react for my dads birthday.",
-    //   imageUrl: "/images/thebirds/thebirds.jpg",
-    // },
     {
       title: 'Buba',
       description: 'Photos of my best pal',
       imageUrl: "/buba.jpg",
       action: () => Router.push({ pathname: `/buba` })
     },
-    // {
-    //   title: 'MakerzRich',
-    //   description: 'Educational game built in react',
-    //   imageUrl: "/buba.jpg",
-    //   action: () => Router.push({ pathname: `/buba` })
-    // },
   ]
 
   return (
