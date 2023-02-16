@@ -20,19 +20,14 @@ export default function Home() {
       </Head>
       <AboutMe />
       <Skills />
-
-      {/* TODO make it less lame? */}
-      {/* <Strengths /> */}
-
       <Heading>
         <h1>
           Experience & Education
         </h1>
       </Heading>
-      <Timeline />
       <LifeTree />
 
-      {/* Leave at the bottom 🍃*/}
+      {/* Leaves at the bottom 🍃*/}
       <Leaves />
     </>
   )
