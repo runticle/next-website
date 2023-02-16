@@ -42,23 +42,14 @@ const Section = styled.section`
 
     .imageBox {
         width: 100%;
-        /* height: 350px; */
         overflow: hidden;
-        /* max-width: 600px; */
-        max-height: 350px;
+        max-height: 400px;
         border-top-left-radius: var(--spacing);
         border-top-right-radius: var(--spacing);
-
-        margin: 0 auto;
-
-         > div {
-            position: unset !important;
-        }
 
         @media screen and (max-width: 768px) {
             width: 100%;
         }
-
 
         .image {
             object-fit: cover;
