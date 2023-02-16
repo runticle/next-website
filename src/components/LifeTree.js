@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const LifeTreeStyle = styled.div`
-    height: 90vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,9 +9,7 @@ const LifeTreeStyle = styled.div`
     margin: 0 auto;
     
     position: relative;
-    
-    // delete when footer fixed
-    margin-bottom: 100px;
+
 
     --stemThickness: 6px;
 
@@ -21,7 +19,7 @@ const LifeTreeStyle = styled.div`
 
     // not for mobile
     @media screen and (max-width: 768px) {
-        display:none;
+        transform: scale(0.6); // haha absolutely horrendous but I hate the mobile timeline and don't want to redo it
     }
 `
 
