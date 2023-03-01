@@ -17,7 +17,7 @@ const LifeTreeStyle = styled.div`
 const ExperienceStyles = styled.div`
     height: 100vh;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: space-around;
     max-width: 1000px;
@@ -26,10 +26,6 @@ const ExperienceStyles = styled.div`
     
     
     @media screen and (max-width: 768px) {
-        /* >h1 {
-            display: none;
-        } */
-        flex-direction: column-reverse;
         transform: scale(0.6); // haha absolutely horrendous but I hate the mobile timeline and don't want to redo it
     }
 `
