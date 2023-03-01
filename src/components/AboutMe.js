@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styled from 'styled-components';
+import TypeWriter from './shared/TypeWriter';
 
 const AboutMeStyles = styled.div`
     display: flex;
@@ -51,14 +52,30 @@ const TextContainer = styled.div`
 export default function AboutMe() {
 
     const title = `Hi, I'm Alfie`
-    const subtitle = `Frontend developer`
+    const subtitle = ` developer`
     const description =
         [
             `Co-founded a successful Bitcoin Brokerage in 2013`,
             `Senior developer at LeSalon - a startup based in London`,
             `Passionate about helping others and bringing joy`
         ]
-
+    const tech = [
+        'Frontend',
+        'Javascript',
+        'NextJS',
+        'HTML5',
+        'React Native',
+        'SCSS',
+        // 'Hugo',
+        'React',
+        // 'Redux',
+        // 'NodeJS',
+        'CSS',
+        // 'Jest',
+        // 'graphql',
+        // 'AWS',
+        // 'SQL',
+    ]
 
     return (
         <AboutMeStyles>
@@ -67,6 +84,8 @@ export default function AboutMe() {
                     {title}
                 </h1>
                 <h2>
+                    {"A "}
+                    <TypeWriter words={tech} />
                     {subtitle}
                 </h2>
                 {description.map((i, index) => <p key={index}>{i}</p>)}

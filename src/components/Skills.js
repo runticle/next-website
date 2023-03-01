@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import TextBlock from './shared/TextBlock';
 import TypeWriter from './shared/TypeWriter';
 
 const SkillsStyle = styled.div`

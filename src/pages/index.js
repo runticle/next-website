@@ -19,7 +19,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AboutMe />
-      <Skills />
+      {/* <Skills /> */}
       <Heading>
         <h1>
           Experience & Education
