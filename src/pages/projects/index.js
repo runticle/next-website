@@ -12,7 +12,7 @@ const projects = [
         ],
         websiteUrl: 'https://todo.alfiefreeman.co.uk',
         githubUrl: 'https://github.com/runticle/floating-thoughts',
-        imageSrc: '/FloatingThoughts.png',
+        imageSrc: '/images/floatingthoughts.png',
     },
     {
         title: "Garden Gremlins",
@@ -23,7 +23,7 @@ const projects = [
         ],
         websiteUrl: 'https://thebirds.alfiefreeman.co.uk',
         githubUrl: 'https://github.com/runticle/garden-gremlins',
-        imageSrc: '/images/thebirds/thebirds.jpg',
+        imageSrc: '/images/thebirds/thebirds.png',
     },
     {
 

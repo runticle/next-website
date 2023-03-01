@@ -10,20 +10,17 @@ const ProjectStyles = styled.main`
 const Section = styled.section`
     max-width: 700px;
     margin: 0 auto;
-    background: var(--lightGreen);
     border-radius: var(--spacing);
-    box-shadow: var(--boxShadowSection);
-    
-    background: linear-gradient(45deg, var(--lightGreen) 0%, var(--middleGreen) 100%); 
+    padding: var(--spacing);
 
     .project-links {
-        padding-bottom: calc(var(--spacing) * 2);
+        padding-bottom: var(--spacing);
             a {
                 font-family: 'rounded';
                 padding: var(--spacing) var(--spacing);
-            text-transform: uppercase;
-            background: none;
-            border-radius: 80% 0; // leaf shape
+                text-transform: uppercase;
+                background: none;
+                border-radius: 80% 0; // leaf shape
             
             cursor: pointer;
             
@@ -37,25 +34,26 @@ const Section = styled.section`
     }
 
     * {
-        color: var(--darkGreen);
+        color: var(--lightGreen);
     }
 
     .imageBox {
-        width: 100%;
         overflow: hidden;
-        max-height: 400px;
-        border-top-left-radius: var(--spacing);
-        border-top-right-radius: var(--spacing);
+        height: 400px;
+        width: 400px;
+        margin: 0 auto;
 
+        border-radius: 50%;
+        box-shadow: var(--boxShadowSection);
+        
         @media screen and (max-width: 768px) {
-            width: 100%;
+            width: 80vw;
+            height: 80vw;
         }
-
+        
         .image {
             object-fit: cover;
-            width: 100% !important;
             position: relative !important;
-            height: 100% !important;
         }
     }
     
@@ -70,9 +68,9 @@ export default function Project({ title, introduction, websiteUrl, imageSrc, git
             </h1>
             <Section>
                 <div className="imageBox">
-                    <div className="image-overlay">
-                        <Image src={imageSrc} alt={title + ' screenshot'} fill className="image" />
-                    </div>
+                    {/* <div className="image-overlay"> */}
+                    <Image src={imageSrc} alt={title + ' screenshot'} fill className="image" />
+                    {/* </div> */}
                 </div>
                 <TextBlock text={introduction} />
                 {
