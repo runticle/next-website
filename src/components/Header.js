@@ -19,7 +19,7 @@ const HeaderStyles = styled.header`
   top: 0;
   right: 0;
   left: 0;
-  height: 120px;
+  height: var(--headerHeight);
   box-sizing: border-box;
   z-index: 9999;
   background: var(--darkGreen);

@@ -20,11 +20,6 @@ export default function Home() {
       </Head>
       <AboutMe />
       {/* <Skills /> */}
-      <Heading>
-        <h1>
-          Experience & Education
-        </h1>
-      </Heading>
       <LifeTree />
 
       {/* Leaves at the bottom 🍃*/}

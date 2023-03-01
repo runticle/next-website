@@ -1,24 +1,34 @@
 import styled from 'styled-components';
+import Heading from './shared/Heading';
 
 const LifeTreeStyle = styled.div`
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 1000px;
-    margin: 0 auto;
-    
+    height: 100%;
+    margin-top: var(--headerHeight);
+    flex: 2;
     position: relative;
-
 
     --stemThickness: 6px;
 
     .information {
         color: var(--darkGreen);
     }
+`
 
-    // not for mobile
+const ExperienceStyles = styled.div`
+    height: 100vh;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+    max-width: 1000px;
+
+    margin: var(--headerHeight) auto;
+    
+    
     @media screen and (max-width: 768px) {
+        >h1 {
+            display: none;
+        }
         transform: scale(0.6); // haha absolutely horrendous but I hate the mobile timeline and don't want to redo it
     }
 `
@@ -199,7 +209,7 @@ export default function LifeTree() {
 
 
     return (
-        <>
+        <ExperienceStyles>
             <LifeTreeStyle>
                 <LeafLeSalon>
                     {renderLeaf(experience[0])}
@@ -219,7 +229,10 @@ export default function LifeTree() {
                 <Trunk />
                 {/* <Leaves /> */}
             </LifeTreeStyle >
-        </>
+            <Heading>
+                Experience & Education
+            </Heading>
+        </ExperienceStyles>
     )
 }
 

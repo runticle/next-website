@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const HeadingStyles = styled.div`
+const HeadingStyles = styled.h1`
     color: var(--lightGreen);
     text-align: center;
 `
@@ -9,9 +9,7 @@ const HeadingStyles = styled.div`
 export default function Heading({ children }) {
     return (
         <HeadingStyles>
-            <h1>
-                {children}
-            </h1>
+            {children}
         </HeadingStyles>
     )
 }
