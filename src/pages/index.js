@@ -1,13 +1,8 @@
 import AboutMe from '@/components/AboutMe'
-import Heading from '@/components/shared/Heading'
 import Leaves from '@/components/shared/Leaves'
 import LifeTree from '@/components/LifeTree'
-import Skills from '@/components/Skills'
-import Strengths from '@/components/Strengths'
-import Stuffs from '@/components/Stuffs'
-import Timeline from '@/components/Timeline'
 import Head from 'next/head'
-import Image from 'next/image'
+import MoreAboutMe from '@/components/MoreAboutMe'
 
 export default function Home() {
   return (
@@ -19,7 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AboutMe />
-      {/* <Skills /> */}
+      <MoreAboutMe />
       <LifeTree />
 
       {/* Leaves at the bottom 🍃*/}

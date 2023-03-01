@@ -23,7 +23,8 @@ const ImageContainer = styled.div`
     overflow: hidden;
 
     @media screen and (max-width: 767px) {
-        width: 100%;    
+        width: 80vw;    
+        height: 80vw;
     }
 
     > div {

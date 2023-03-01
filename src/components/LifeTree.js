@@ -26,9 +26,10 @@ const ExperienceStyles = styled.div`
     
     
     @media screen and (max-width: 768px) {
-        >h1 {
+        /* >h1 {
             display: none;
-        }
+        } */
+        flex-direction: column-reverse;
         transform: scale(0.6); // haha absolutely horrendous but I hate the mobile timeline and don't want to redo it
     }
 `
