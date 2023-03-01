@@ -1,9 +1,6 @@
 import Image from 'next/image';
 import styled from 'styled-components';
-import Card from './shared/Card';
 import Heading from './shared/Heading';
-import Leaves from './shared/Leaves';
-import TypeWriter from './shared/TypeWriter';
 
 const AboutMeStyles = styled.div`
     display: flex;
@@ -40,9 +37,10 @@ const ImageContainer = styled.div`
     height: 30vh;
     /* border-radius: 5px; */
     overflow: hidden;
-
+    
     @media screen and (max-width: 767px) {
         width: 100%;    
+        height: 50vw;
     }
 
     > div {
@@ -56,6 +54,16 @@ const ImageContainer = styled.div`
         height: 100% !important;
     }
 `;
+
+const Quote = styled.p`
+    color: var(--middleGreen);
+    line-height: 2rem;
+    text-align: center;
+    font-family: 'tender';
+    text-transform: uppercase;
+    /* padding-top: calc(var(--spacing) * 4); */
+
+`
 
 const TextContainer = styled.div`
     width: 100%;
@@ -101,8 +109,10 @@ export default function MoreAboutMe() {
                     Who Am I Really
                 </Heading>
                 {description.map((i, index) => <p key={index}>{i}</p>)}
+                <Quote>
+                    {quote}
+                </Quote>
             </TextContainer>
-            {/* <Leaves /> */}
         </AboutMeStyles >
     );
 }
