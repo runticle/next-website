@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const AboutMeStyles = styled.div`
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column-reverse;
+    justify-content: center;
     align-items: center;
     height: calc(100vh - 200px);
     margin-bottom: var(--spacing);
@@ -16,9 +16,9 @@ const AboutMeStyles = styled.div`
 `
 
 const ImageContainer = styled.div`
-    width: 40%;
-    height: 40vh;
-    border-radius: 70% 0;
+    width: 30vh;
+    height: 30vh;
+    border-radius: 50%;
     overflow: hidden;
 
     @media screen and (max-width: 767px) {
@@ -26,23 +26,22 @@ const ImageContainer = styled.div`
     }
 
     > div {
-    position: unset !important;
+        position: unset !important;
     }
 
     .image {
-    object-fit: cover;
-    width: 100% !important;
-    position: relative !important;
-    height: 100% !important;
+        object-fit: cover;
+        width: 100% !important;
+        position: relative !important;
+        height: 100% !important;
     }
 `;
 
 const TextContainer = styled.div`
-    width: 60%;
-    padding-right: var(--spacing);
+    width: 100%;
     color: var(--lightGreen);
     line-height: 2rem;
-    text-align: left;
+    text-align: center;
 
     @media screen and (max-width: 767px) {
         width: 100%;
@@ -55,10 +54,9 @@ export default function AboutMe() {
     const subtitle = `Frontend developer`
     const description =
         [
-            `I co-founded a successful Bitcoin Brokerage in 2013`,
-            `But I studied and worked in Mechanical and Acoustic engineering until 2018...`,
-            `...and then did a coding bootcamp at Makers Academy in London`,
+            `Co-founded a successful Bitcoin Brokerage in 2013`,
             `Senior developer at LeSalon - a startup based in London`,
+            `Passionate about helping others and bringing joy`
         ]
 
 
