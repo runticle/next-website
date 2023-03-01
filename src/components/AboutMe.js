@@ -21,6 +21,8 @@ const ImageContainer = styled.div`
     height: 30vh;
     border-radius: 50%;
     overflow: hidden;
+    box-shadow: var(--boxShadowSection);
+
 
     @media screen and (max-width: 767px) {
         width: 80vw;    

@@ -10,12 +10,8 @@ const ProjectStyles = styled.main`
 const Section = styled.section`
     max-width: 700px;
     margin: 0 auto;
-    background: var(--lightGreen);
     border-radius: var(--spacing);
-    box-shadow: var(--boxShadowSection);
     padding: var(--spacing);
-
-    background: linear-gradient(45deg, var(--lightGreen) 0%, var(--middleGreen) 100%); 
 
     .project-links {
         padding-bottom: var(--spacing);
@@ -38,7 +34,7 @@ const Section = styled.section`
     }
 
     * {
-        color: var(--darkGreen);
+        color: var(--lightGreen);
     }
 
     .imageBox {
@@ -48,9 +44,11 @@ const Section = styled.section`
         margin: 0 auto;
 
         border-radius: 50%;
+        box-shadow: var(--boxShadowSection);
         
         @media screen and (max-width: 768px) {
-            width: 100%;
+            width: 80vw;
+            height: 80vw;
         }
         
         .image {

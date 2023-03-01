@@ -22,6 +22,7 @@ const AboutMeStyles = styled.div`
         width: 30vw;
         border-radius: 10px;
         overflow: hidden;
+        box-shadow: var(--boxShadowSection);
     }
 
     @media screen and (max-width: 767px) {
