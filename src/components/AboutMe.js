@@ -18,7 +18,7 @@ const AboutMeStyles = styled.div`
 const ImageContainer = styled.div`
     width: 40%;
     height: 40vh;
-    border-radius: 80% 0;
+    border-radius: 70% 0;
     overflow: hidden;
 
     @media screen and (max-width: 767px) {
@@ -52,7 +52,7 @@ const TextContainer = styled.div`
 export default function AboutMe() {
 
     const title = `Hi, I'm Alfie`
-    const subtitle = `Web & App developer`
+    const subtitle = `Frontend developer`
     const description =
         [
             `I co-founded a successful Bitcoin Brokerage in 2013`,
@@ -74,7 +74,7 @@ export default function AboutMe() {
                 {description.map((i, index) => <p key={index}>{i}</p>)}
             </TextContainer>
             <ImageContainer>
-                <Image src="/analog-me.JPG" alt="Me" fill className={'image'} />
+                <Image src="/BIGALFIE.jpg" alt="Me" fill className={'image'} />
             </ImageContainer >
         </AboutMeStyles >
     );
